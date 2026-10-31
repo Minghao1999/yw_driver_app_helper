@@ -245,7 +245,7 @@ function Chapter({ chapter, onOpen, copy }) {
         </div>
       </header>
       {chapter.note && <p className="chapter-note"><span>{copy.note}</span>{chapter.note}</p>}
-      <div className={`entry-block ${chapter.entry.length === 3 ? 'has-three-images' : ''}`}>
+      <div className={`entry-block ${chapter.entry.length > 1 ? 'has-multiple-images' : ''} ${chapter.entry.length === 3 ? 'has-three-images' : ''}`}>
         <div className="entry-copy">
           <span>{copy.entry}</span>
           <h3>{chapter.entryTitle}</h3>

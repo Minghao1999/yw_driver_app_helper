@@ -116,8 +116,8 @@ a { color: inherit; }
 .language-en .entry-copy h3, .language-es .entry-copy h3 { font-size: clamp(15px, 1.4vw, 16px); letter-spacing: -.02em; }
 .entry-copy p { margin: 0; color: #6d7b76; font-size: 13px; line-height: 1.7; }
 .entry-images { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 250px)); gap: 18px; justify-content: start; }
-.entry-block.has-three-images { grid-template-columns: 1fr; gap: 24px; }
-.entry-block.has-three-images .entry-copy { padding-bottom: 0; }
+.entry-block.has-multiple-images { grid-template-columns: 1fr; gap: 24px; }
+.entry-block.has-multiple-images .entry-copy { padding-bottom: 0; }
 .entry-block.has-three-images .entry-images { grid-template-columns: repeat(3, 250px); width: 100%; }
 
 .procedure { margin-top: 84px; padding-top: 72px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
