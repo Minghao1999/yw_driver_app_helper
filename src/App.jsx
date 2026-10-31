@@ -239,6 +239,11 @@ function Chapter({ chapter, onOpen, copy }) {
         </div>
       </header>
       {chapter.note && <p className="chapter-note"><span>{copy.note}</span>{chapter.note}</p>}
+      {chapter.images?.length > 0 && (
+        <div className={`screenshot-grid chapter-screenshots ${chapter.images.length === 1 ? 'single' : ''}`}>
+          {chapter.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}
+        </div>
+      )}
       {chapter.entry.length > 0 && (
         <div className={`entry-block ${chapter.entry.length > 1 ? 'has-multiple-images' : ''} ${chapter.entry.length === 3 ? 'has-three-images' : ''}`}>
           <div className="entry-copy">
