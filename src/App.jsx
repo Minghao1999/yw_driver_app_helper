@@ -109,11 +109,16 @@ function Header({ endpoint, setEndpoint, language, setLanguage, mobileOpen, setM
 
 function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, copy }) {
   const sidebarRef = useRef(null)
-  const links = useMemo(() => chapters.flatMap((chapter) => [
-    { id: chapter.id, title: chapter.title, chapter: true, number: chapter.number },
-    ...chapter.procedures.flatMap((procedure) => [
-      { id: procedure.id, title: procedure.title },
-      ...(procedure.children ?? []).map((child) => ({ id: child.id, title: child.title, child: true })),
+  const links = useMemo(() => chapters.flatMap((chapter, chapterIndex) => [
+    { id: chapter.id, title: chapter.title, chapter: true, number: String(chapterIndex + 1) },
+    ...chapter.procedures.flatMap((procedure, procedureIndex) => [
+      { id: procedure.id, title: procedure.title, number: `${chapterIndex + 1}.${procedureIndex + 1}` },
+      ...(procedure.children ?? []).map((child, childIndex) => ({
+        id: child.id,
+        title: child.title,
+        child: true,
+        number: `${chapterIndex + 1}.${procedureIndex + 1}.${childIndex + 1}`,
+      })),
     ]),
   ]), [chapters])
   const [activeId, setActiveId] = useState(links[0]?.id ?? '')
@@ -185,7 +190,7 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, c
               aria-current={activeId === link.id ? 'location' : undefined}
               onClick={() => { setActiveId(link.id); setMobileOpen(false) }}
             >
-              {link.chapter && <span>{link.number}</span>}
+              <span className="link-number">{link.number}</span>
               {link.title}
             </a>
           ))}
