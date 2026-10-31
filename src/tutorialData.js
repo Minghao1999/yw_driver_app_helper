@@ -108,15 +108,15 @@ export const chapters = [
         id: 'map-provider',
         title: '如何换地图供应商',
         summary: '在底部供应商菜单中切换地图来源。',
-        steps: ['点击底部当前地图供应商名称', '在列表中选择 NEXT_BILLION、GOOGLE 或 OPTIMO'],
-        images: [image(25, '底部地图供应商切换入口'), image(26, '地图供应商选择列表')],
+        steps: ['点击底部当前地图供应商名称', '在列表中选择 NEXT_BILLION、GOOGLE 或 OPTIMO', '修改后点击“应用”'],
+        images: [image(25, '底部地图供应商切换入口'), image(26, '地图供应商选择列表'), image(27, '修改地图供应商后点击应用')],
       },
       {
         id: 'save-plan',
         title: '如何保存和另存为',
         summary: '覆盖当前方案，或保留原方案并新建副本。',
         steps: ['点击“保存”可覆盖原方案', '点击“另存为”可新建方案'],
-        images: [image(27, '点击保存覆盖原方案'), image(28, '点击另存为新建方案')],
+        images: [image(28, '点击保存覆盖原方案'), image(29, '点击另存为新建方案')],
       },
     ],
   },
@@ -202,8 +202,8 @@ const translations = {
         },
         'map-provider': {
           title: 'Change map provider',
-          steps: ['Select the current map provider name at the bottom', 'Choose NEXT_BILLION, GOOGLE, or OPTIMO from the list'],
-          imageAlts: ['Map provider control at the bottom of the page', 'Map provider selection list'],
+          steps: ['Select the current map provider name at the bottom', 'Choose NEXT_BILLION, GOOGLE, or OPTIMO from the list', 'Select “Apply” after making the change'],
+          imageAlts: ['Map provider control at the bottom of the page', 'Map provider selection list', 'Selecting Apply after changing the map provider'],
         },
         'save-plan': {
           title: 'Save and Save As',
@@ -292,8 +292,8 @@ const translations = {
         },
         'map-provider': {
           title: 'Cambiar proveedor de mapas',
-          steps: ['Pulsa el nombre del proveedor de mapas actual en la parte inferior', 'Elige NEXT_BILLION, GOOGLE u OPTIMO en la lista'],
-          imageAlts: ['Control del proveedor de mapas en la parte inferior', 'Lista de proveedores de mapas'],
+          steps: ['Pulsa el nombre del proveedor de mapas actual en la parte inferior', 'Elige NEXT_BILLION, GOOGLE u OPTIMO en la lista', 'Pulsa «Aplicar» después de realizar el cambio'],
+          imageAlts: ['Control del proveedor de mapas en la parte inferior', 'Lista de proveedores de mapas', 'Selección de Aplicar después de cambiar el proveedor de mapas'],
         },
         'save-plan': {
           title: 'Guardar y Guardar como',
