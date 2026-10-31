@@ -206,8 +206,8 @@ a { color: inherit; }
   .chapter { padding: 68px 20px; }
   .chapter-header { grid-template-columns: 52px 1fr; gap: 15px; margin-bottom: 38px; }
   .chapter-number { width: 48px; height: 48px; font-size: 14px; }
-  .chapter h2 { font-size: clamp(30px, 9vw, 38px); }
-  .language-en .chapter h2, .language-es .chapter h2 { font-size: clamp(21px, 6vw, 28px); }
+  .chapter h2 { font-size: clamp(20px, 5.6vw, 24px); }
+  .language-en .chapter h2, .language-es .chapter h2 { font-size: clamp(15px, 4.2vw, 19px); }
   .chapter-note { margin: -10px 0 38px; }
   .chapter-note span { display: block; margin: 0 0 5px; }
   .entry-block { grid-template-columns: 1fr; gap: 20px; padding: 19px; }
