@@ -182,12 +182,16 @@ a { color: inherit; }
 
 @media (max-width: 720px) {
   html { scroll-padding-top: 78px; }
-  .site-header { height: 68px; padding: 0 14px; }
+  .site-header { height: 68px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; padding: 0 14px; }
   .brand-mark { width: 36px; height: 36px; border-radius: 10px; font-size: 14px; }
   .brand-copy { display: none; }
+  .header-center { display: block; justify-self: center; min-width: 0; }
+  .header-center .endpoint-switch { gap: 2px; padding: 2px; }
+  .header-center .endpoint-switch button { padding: 7px 6px; font-size: 11px; white-space: nowrap; }
   .language-trigger { height: 38px; padding: 0 10px; }
   .language-trigger span:not(.language-caret) { display: none; }
   .mobile-menu-button { width: 38px; height: 38px; }
+  .mobile-endpoint { display: none; }
   .sidebar { top: 68px; width: min(310px, 86vw); }
   .sidebar-backdrop { inset: 68px 0 0; }
   .tutorial-main { padding-top: 68px; }
