@@ -1,11 +1,38 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { chapters } from './tutorialData.js'
+import { getLocalizedChapters } from './tutorialData.js'
 
 const languages = [
   { code: 'zh', label: '中文' },
   { code: 'en', label: 'English' },
   { code: 'es', label: 'Español' },
 ]
+
+const interfaceCopy = {
+  zh: {
+    brandSubtitle: '操作指南', selectEndpoint: '选择教程端', driver: '司机端', fleet: '车队长端', selectLanguage: '选择语言',
+    backToTop: '返回顶部', openMenu: '打开教程目录', closeMenu: '关闭教程目录', tutorialContents: '教程目录', version: '版本',
+    driverMissingTitle: '司机端资料待补充', driverMissingBody: '当前项目已预留司机端教程入口。收到司机端资料后，可按相同结构补充章节、步骤与截图。',
+    contentStatus: '内容状态', zoom: '放大', viewLarger: '放大查看', subTutorial: '子教程', operationTutorial: '操作教程', note: '注意',
+    beforeStart: '使用前确认', entry: '入口', closeImage: '关闭大图', footer: 'YW Driver App Helper · 纯前端静态教程',
+    skip: '跳到主要内容', backToTopFooter: '返回顶部 ↑',
+  },
+  en: {
+    brandSubtitle: 'User Guide', selectEndpoint: 'Choose a guide', driver: 'Driver', fleet: 'Fleet Manager', selectLanguage: 'Select language',
+    backToTop: 'Back to top', openMenu: 'Open tutorial menu', closeMenu: 'Close tutorial menu', tutorialContents: 'Tutorial contents', version: 'Version',
+    driverMissingTitle: 'Driver guide coming soon', driverMissingBody: 'The driver guide section is ready. Once the source material is available, chapters, steps, and screenshots can be added in the same format.',
+    contentStatus: 'Content status', zoom: 'View larger', viewLarger: 'View larger', subTutorial: 'Sub-guide', operationTutorial: 'Instructions', note: 'Note',
+    beforeStart: 'Before you start', entry: 'Entry', closeImage: 'Close enlarged image', footer: 'YW Driver App Helper · Front-end tutorial',
+    skip: 'Skip to main content', backToTopFooter: 'Back to top ↑',
+  },
+  es: {
+    brandSubtitle: 'Guía de uso', selectEndpoint: 'Elegir guía', driver: 'Conductor', fleet: 'Jefe de flota', selectLanguage: 'Seleccionar idioma',
+    backToTop: 'Volver arriba', openMenu: 'Abrir índice del tutorial', closeMenu: 'Cerrar índice del tutorial', tutorialContents: 'Índice del tutorial', version: 'Versión',
+    driverMissingTitle: 'Guía del conductor pendiente', driverMissingBody: 'La sección de la guía del conductor está preparada. Cuando esté disponible el material original, se podrán añadir capítulos, pasos y capturas con el mismo formato.',
+    contentStatus: 'Estado del contenido', zoom: 'Ampliar', viewLarger: 'Ver ampliada', subTutorial: 'Subguía', operationTutorial: 'Instrucciones', note: 'Nota',
+    beforeStart: 'Antes de empezar', entry: 'Acceso', closeImage: 'Cerrar imagen ampliada', footer: 'YW Driver App Helper · Tutorial web',
+    skip: 'Saltar al contenido principal', backToTopFooter: 'Volver arriba ↑',
+  },
+}
 
 function Icon({ name, size = 20 }) {
   const paths = {
@@ -24,7 +51,7 @@ function Icon({ name, size = 20 }) {
   )
 }
 
-function LanguagePicker({ language, onChange }) {
+function LanguagePicker({ language, onChange, copy }) {
   const [open, setOpen] = useState(false)
   const current = languages.find((item) => item.code === language)
 
@@ -36,7 +63,7 @@ function LanguagePicker({ language, onChange }) {
         <span className={`language-caret ${open ? 'is-open' : ''}`}>⌄</span>
       </button>
       {open && (
-        <div className="language-menu" role="listbox" aria-label="选择语言">
+        <div className="language-menu" role="listbox" aria-label={copy.selectLanguage}>
           {languages.map((item) => (
             <button
               key={item.code}
@@ -55,26 +82,26 @@ function LanguagePicker({ language, onChange }) {
   )
 }
 
-function EndpointSwitch({ endpoint, onChange }) {
+function EndpointSwitch({ endpoint, onChange, copy }) {
   return (
-    <div className="endpoint-switch" aria-label="选择教程端">
-      <button className={endpoint === 'driver' ? 'is-active' : ''} onClick={() => onChange('driver')}>司机端</button>
-      <button className={endpoint === 'fleet' ? 'is-active' : ''} onClick={() => onChange('fleet')}>车队长端</button>
+    <div className="endpoint-switch" aria-label={copy.selectEndpoint}>
+      <button className={endpoint === 'driver' ? 'is-active' : ''} onClick={() => onChange('driver')}>{copy.driver}</button>
+      <button className={endpoint === 'fleet' ? 'is-active' : ''} onClick={() => onChange('fleet')}>{copy.fleet}</button>
     </div>
   )
 }
 
-function Header({ endpoint, setEndpoint, language, setLanguage, mobileOpen, setMobileOpen }) {
+function Header({ endpoint, setEndpoint, language, setLanguage, mobileOpen, setMobileOpen, copy }) {
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="返回顶部">
+      <a className="brand" href="#top" aria-label={copy.backToTop}>
         <span className="brand-mark">YW</span>
-        <span className="brand-copy"><strong>Driver App</strong><small>操作指南</small></span>
+        <span className="brand-copy"><strong>Driver App</strong><small>{copy.brandSubtitle}</small></span>
       </a>
-      <div className="header-center"><EndpointSwitch endpoint={endpoint} onChange={setEndpoint} /></div>
+      <div className="header-center"><EndpointSwitch endpoint={endpoint} onChange={setEndpoint} copy={copy} /></div>
       <div className="header-actions">
-        <LanguagePicker language={language} onChange={setLanguage} />
-        <button className="mobile-menu-button" onClick={() => setMobileOpen(!mobileOpen)} aria-label="打开教程目录">
+        <LanguagePicker language={language} onChange={setLanguage} copy={copy} />
+        <button className="mobile-menu-button" onClick={() => setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? copy.closeMenu : copy.openMenu}>
           <Icon name={mobileOpen ? 'close' : 'menu'} />
         </button>
       </div>
@@ -82,7 +109,7 @@ function Header({ endpoint, setEndpoint, language, setLanguage, mobileOpen, setM
   )
 }
 
-function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint }) {
+function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, copy }) {
   const sidebarRef = useRef(null)
   const links = useMemo(() => chapters.flatMap((chapter) => [
     { id: chapter.id, title: chapter.title, chapter: true, number: chapter.number },
@@ -90,7 +117,7 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint }) {
       { id: procedure.id, title: procedure.title },
       ...(procedure.children ?? []).map((child) => ({ id: child.id, title: child.title, child: true })),
     ]),
-  ]), [])
+  ]), [chapters])
   const [activeId, setActiveId] = useState(links[0]?.id ?? '')
 
   useEffect(() => {
@@ -142,15 +169,15 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint }) {
   }, [activeId])
 
   return (
-    <aside ref={sidebarRef} className={`sidebar ${endpoint === 'driver' ? 'is-driver' : ''} ${mobileOpen ? 'is-open' : ''}`} aria-label="教程目录">
+    <aside ref={sidebarRef} className={`sidebar ${endpoint === 'driver' ? 'is-driver' : ''} ${mobileOpen ? 'is-open' : ''}`} aria-label={copy.tutorialContents}>
       <div className="sidebar-inner">
         <div className="mobile-endpoint">
-          <p className="sidebar-label">选择教程端</p>
-          <EndpointSwitch endpoint={endpoint} onChange={(value) => { setEndpoint(value); setMobileOpen(false) }} />
+          <p className="sidebar-label">{copy.selectEndpoint}</p>
+          <EndpointSwitch endpoint={endpoint} onChange={(value) => { setEndpoint(value); setMobileOpen(false) }} copy={copy} />
         </div>
         {endpoint === 'fleet' ? (
           <>
-            <p className="sidebar-label">教程目录</p>
+            <p className="sidebar-label">{copy.tutorialContents}</p>
             <nav>
               {links.map((link) => (
                 <a
@@ -165,52 +192,52 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint }) {
                 </a>
               ))}
             </nav>
-            <div className="sidebar-meta"><span>版本</span><strong>2026.10</strong></div>
+            <div className="sidebar-meta"><span>{copy.version}</span><strong>2026.10</strong></div>
           </>
         ) : (
-          <p className="sidebar-empty">司机端资料尚未提供。切换至车队长端可查看现有教程。</p>
+          <p className="sidebar-empty">{copy.driverMissingBody}</p>
         )}
       </div>
     </aside>
   )
 }
 
-function Screenshot({ item, onOpen, index }) {
+function Screenshot({ item, onOpen, index, copy }) {
   return (
-    <button className="screenshot" onClick={() => onOpen(item)} aria-label={`放大查看：${item.alt}`}>
+    <button className="screenshot" onClick={() => onOpen(item)} aria-label={`${copy.viewLarger}: ${item.alt}`}>
       <span className="screenshot-number">{String(index + 1).padStart(2, '0')}</span>
       <span className="screenshot-frame">
         <img src={item.src} alt={item.alt} loading="lazy" />
       </span>
-      <span className="zoom-hint"><Icon name="expand" size={16} /> 放大</span>
+      <span className="zoom-hint"><Icon name="expand" size={16} /> {copy.zoom}</span>
     </button>
   )
 }
 
-function Procedure({ procedure, onOpen, nested = false }) {
+function Procedure({ procedure, onOpen, copy, nested = false }) {
   return (
     <article className={`procedure ${nested ? 'is-subprocedure' : ''}`} id={procedure.id}>
       <div className="procedure-copy">
-        <p className="section-kicker">{nested ? '子教程' : '操作教程'}</p>
+        <p className="section-kicker">{nested ? copy.subTutorial : copy.operationTutorial}</p>
         <h3>{procedure.title}</h3>
         <ol className="steps">
           {procedure.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}
         </ol>
-        {procedure.note && <p className="note"><strong>注意</strong>{procedure.note}</p>}
+        {procedure.note && <p className="note"><strong>{copy.note}</strong>{procedure.note}</p>}
       </div>
       <div className={`screenshot-grid ${procedure.images.length === 1 ? 'single' : ''}`}>
-        {procedure.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} />)}
+        {procedure.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}
       </div>
       {procedure.children?.length > 0 && (
         <div className="subprocedures">
-          {procedure.children.map((child) => <Procedure key={child.id} procedure={child} onOpen={onOpen} nested />)}
+          {procedure.children.map((child) => <Procedure key={child.id} procedure={child} onOpen={onOpen} copy={copy} nested />)}
         </div>
       )}
     </article>
   )
 }
 
-function Chapter({ chapter, onOpen }) {
+function Chapter({ chapter, onOpen, copy }) {
   return (
     <section className={`chapter accent-${chapter.accent}`} id={chapter.id}>
       <header className="chapter-header">
@@ -220,35 +247,33 @@ function Chapter({ chapter, onOpen }) {
           <h2>{chapter.title}</h2>
         </div>
       </header>
-      {chapter.note && <p className="chapter-note"><span>使用前确认</span>{chapter.note}</p>}
+      {chapter.note && <p className="chapter-note"><span>{copy.beforeStart}</span>{chapter.note}</p>}
       <div className={`entry-block ${chapter.entry.length === 3 ? 'has-three-images' : ''}`}>
         <div className="entry-copy">
-          <span>入口</span>
-          <h3>从首页进入{chapter.title}</h3>
+          <span>{copy.entry}</span>
+          <h3>{chapter.entryTitle}</h3>
         </div>
         <div className="entry-images">
-          {chapter.entry.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} />)}
+          {chapter.entry.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}
         </div>
       </div>
-      {chapter.procedures.map((procedure) => <Procedure key={procedure.id} procedure={procedure} onOpen={onOpen} />)}
+      {chapter.procedures.map((procedure) => <Procedure key={procedure.id} procedure={procedure} onOpen={onOpen} copy={copy} />)}
     </section>
   )
 }
 
-function Placeholder({ type, onFleet }) {
-  const isLanguage = type === 'language'
+function Placeholder({ copy }) {
   return (
     <main className="placeholder-page" id="main-content">
-      <div className="placeholder-visual"><span>{isLanguage ? '译' : 'D'}</span></div>
-      <p className="section-kicker">Content status</p>
-      <h1>{isLanguage ? '内容待翻译' : '司机端资料待补充'}</h1>
-      <p>{isLanguage ? 'English / Español 教程尚未提供。目前仅展示中文原始内容，不会自动生成或补写译文。' : '当前项目已预留司机端教程入口。收到司机端资料后，可按相同结构补充章节、步骤与截图。'}</p>
-      {isLanguage && <button className="primary-button" onClick={onFleet}>返回中文内容 <Icon name="arrow" size={18} /></button>}
+      <div className="placeholder-visual"><span>D</span></div>
+      <p className="section-kicker">{copy.contentStatus}</p>
+      <h1>{copy.driverMissingTitle}</h1>
+      <p>{copy.driverMissingBody}</p>
     </main>
   )
 }
 
-function Lightbox({ image, onClose }) {
+function Lightbox({ image, onClose, copy }) {
   useEffect(() => {
     if (!image) return undefined
     const onKey = (event) => event.key === 'Escape' && onClose()
@@ -259,7 +284,7 @@ function Lightbox({ image, onClose }) {
   if (!image) return null
   return (
     <div className="lightbox" role="dialog" aria-modal="true" aria-label={image.alt} onClick={onClose}>
-      <button className="lightbox-close" onClick={onClose} aria-label="关闭大图"><Icon name="close" /></button>
+      <button className="lightbox-close" onClick={onClose} aria-label={copy.closeImage}><Icon name="close" /></button>
       <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
         <img src={image.src} alt={image.alt} />
         <p>{image.alt}</p>
@@ -268,12 +293,12 @@ function Lightbox({ image, onClose }) {
   )
 }
 
-function TutorialHome({ onOpen }) {
+function TutorialHome({ chapters, onOpen, copy }) {
   return (
     <main className="tutorial-main" id="main-content">
       <span id="top" className="top-anchor" />
-      {chapters.map((chapter) => <Chapter key={chapter.id} chapter={chapter} onOpen={onOpen} />)}
-      <footer className="footer"><span className="brand-mark">YW</span><p>YW Driver App Helper · 纯前端静态教程</p><a href="#top">返回顶部 ↑</a></footer>
+      {chapters.map((chapter) => <Chapter key={chapter.id} chapter={chapter} onOpen={onOpen} copy={copy} />)}
+      <footer className="footer"><span className="brand-mark">YW</span><p>{copy.footer}</p><a href="#top">{copy.backToTopFooter}</a></footer>
     </main>
   )
 }
@@ -283,21 +308,25 @@ export default function App() {
   const [language, setLanguage] = useState('zh')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [lightboxImage, setLightboxImage] = useState(null)
+  const copy = interfaceCopy[language]
+  const chapters = useMemo(() => getLocalizedChapters(language), [language])
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : language
+  }, [language])
 
   return (
-    <>
-      <a className="skip-link" href="#main-content">跳到主要内容</a>
-      <Header endpoint={endpoint} setEndpoint={setEndpoint} language={language} setLanguage={setLanguage} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-      {language === 'zh' && <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} endpoint={endpoint} setEndpoint={setEndpoint} />}
-      {mobileOpen && <button className="sidebar-backdrop" onClick={() => setMobileOpen(false)} aria-label="关闭目录" />}
-      {language !== 'zh' ? (
-        <Placeholder type="language" onFleet={() => setLanguage('zh')} />
-      ) : endpoint === 'driver' ? (
-        <Placeholder type="driver" />
+    <div className={`app language-${language}`}>
+      <a className="skip-link" href="#main-content">{copy.skip}</a>
+      <Header endpoint={endpoint} setEndpoint={setEndpoint} language={language} setLanguage={setLanguage} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} copy={copy} />
+      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} endpoint={endpoint} setEndpoint={setEndpoint} chapters={chapters} copy={copy} />
+      {mobileOpen && <button className="sidebar-backdrop" onClick={() => setMobileOpen(false)} aria-label={copy.closeMenu} />}
+      {endpoint === 'driver' ? (
+        <Placeholder copy={copy} />
       ) : (
-        <TutorialHome onOpen={setLightboxImage} />
+        <TutorialHome chapters={chapters} onOpen={setLightboxImage} copy={copy} />
       )}
-      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
-    </>
+      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} copy={copy} />
+    </div>
   )
 }

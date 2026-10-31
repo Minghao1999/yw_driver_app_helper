@@ -123,6 +123,220 @@ export const chapters = [
   },
 ]
 
+const translations = {
+  en: {
+    'driver-management': {
+      title: 'Driver Management',
+      eyebrow: 'Driver management',
+      description: 'Add, edit, and search driver accounts.',
+      entryTitle: 'Open Driver Management',
+      entryAlts: ['Driver Management entry on the Home screen'],
+      procedures: {
+        'add-driver': {
+          title: 'Add a new driver',
+          steps: ['On the Driver Management page, select “Add Driver”', 'Enter the name', 'Enter the password', 'Select Enabled or Disabled', 'Select “Save and Add”'],
+          imageAlts: ['Add Driver button on the Driver Management page', 'Add Driver form and Save and Add button'],
+        },
+        'edit-driver': {
+          title: 'Edit driver information',
+          steps: ['Select the driver you want to edit from the driver list', 'Enter a new password if needed; leave it blank to keep the current password', 'Change the status to Enabled or Disabled', 'Select “Save”'],
+          imageAlts: ['Selecting a driver from the driver list', 'Password, status, and Save controls on the Edit Driver page'],
+        },
+        'search-driver': {
+          title: 'Search for a driver',
+          steps: ['Enter the driver account or name', 'Select “Search”'],
+          note: 'Account searches require an exact match; names support partial matches.',
+          imageAlts: ['Search field and Search button on the Driver Management page'],
+        },
+      },
+    },
+    'route-splitting': {
+      title: 'Route Splitting',
+      eyebrow: 'Route splitting',
+      description: 'Split boxes by sequence, driver count, package count, or area.',
+      note: 'Boxes can only be split when their status is “Pending Check-in.”',
+      entryTitle: 'Open Route Splitting',
+      entryAlts: ['Route Splitting entry on the Home screen', 'Split Boxes button for a Pending Check-in box'],
+      procedures: {
+        'split-sequence': {
+          title: 'Split boxes in sequence',
+          steps: ['Select “Split in Sequence”', 'Enter the number of stops to split', 'Select a driver', 'Select the checkmark to confirm', 'To continue splitting, select another range of stops', 'Assign a driver', 'When finished, select “Apply”'],
+          imageAlts: ['Split in Sequence option in the split overview', 'Entering the number of stops and selecting a driver', 'Selecting another stop range and applying the split'],
+          children: {
+            'one-tap-split': {
+              title: 'Use one-tap split',
+              steps: ['Select “One-tap Split” on the right side of the map', 'Choose equal split by driver and enter the number of drivers, or choose equal split by package count and enter the package count', 'Select “Confirm”', 'Select “Apply”'],
+              imageAlts: ['One-tap split distributed equally by driver', 'One-tap split distributed equally by package count'],
+            },
+          },
+        },
+        'split-area': {
+          title: 'Split boxes by area',
+          steps: ['Select “Split by Area”', 'Draw a boundary on the map by placing points around the area', 'Select the checkmark and assign a driver', 'Select “Apply”'],
+          note: 'Select different box tabs to review the results. To start over, delete the split and repeat the steps.',
+          imageAlts: ['Split by Area option in the split overview', 'Drawing an area on the map and assigning a driver', 'Area split results and delete control'],
+        },
+      },
+    },
+    'route-planning': {
+      title: 'Route Planning',
+      eyebrow: 'Route planning',
+      description: 'Split geofences, reorder them, set start and end points, and save plans.',
+      note: 'Route planning is only available when the box status is “Pending Check-in.”',
+      entryTitle: 'Open Route Planning',
+      entryAlts: ['Route Planning entry on the Home screen', 'Route Planning button for a Pending Check-in box', 'Saved plans on the Route Planning page'],
+      procedures: {
+        'split-fence': {
+          title: 'Split a geofence',
+          steps: ['Open a previously saved plan', 'Draw a line inside the existing area by placing points', 'Select “Done”'],
+          imageAlts: ['Drawing a line inside an existing area and selecting Done', 'Result after splitting a geofence'],
+        },
+        'reorder-fence': {
+          title: 'Reorder geofences',
+          steps: ['Press and hold a geofence tab at the top', 'Drag it to the desired position and release'],
+          imageAlts: ['Pressing and dragging a top tab to reorder geofences'],
+        },
+        'set-start-end': {
+          title: 'Set geofence start and end',
+          steps: ['Select “Set Start”', 'Select any location inside the geofence as the start point', 'Select “Set End”', 'Select any location inside the geofence as the end point', 'Select “Route Planning”', 'After planning succeeds, select “Apply”'],
+          note: 'Every geofence must have an end point. The previous geofence’s end point becomes the next geofence’s start point.',
+          imageAlts: ['Setting start and end points inside a geofence', 'Setting end points for multiple geofences and applying route planning'],
+        },
+        'map-provider': {
+          title: 'Change map provider',
+          steps: ['Select the current map provider name at the bottom', 'Choose NEXT_BILLION, GOOGLE, or OPTIMO from the list'],
+          imageAlts: ['Map provider control at the bottom of the page', 'Map provider selection list'],
+        },
+        'save-plan': {
+          title: 'Save and Save As',
+          steps: ['Select “Save” to overwrite the current plan', 'Select “Save As” to create a new plan'],
+          imageAlts: ['Selecting Save to overwrite the current plan', 'Selecting Save As to create a new plan'],
+        },
+      },
+    },
+  },
+  es: {
+    'driver-management': {
+      title: 'Gestión de conductores',
+      eyebrow: 'Gestión de conductores',
+      description: 'Añade, edita y busca cuentas de conductores.',
+      entryTitle: 'Abrir Gestión de conductores',
+      entryAlts: ['Acceso a Gestión de conductores en la pantalla de Inicio'],
+      procedures: {
+        'add-driver': {
+          title: 'Añadir un conductor',
+          steps: ['En Gestión de conductores, pulsa «Añadir conductor»', 'Introduce el nombre', 'Introduce la contraseña', 'Selecciona Activado o Desactivado', 'Pulsa «Guardar y añadir»'],
+          imageAlts: ['Botón Añadir conductor en Gestión de conductores', 'Formulario para añadir un conductor y botón Guardar y añadir'],
+        },
+        'edit-driver': {
+          title: 'Editar datos del conductor',
+          steps: ['Selecciona en la lista el conductor que deseas editar', 'Introduce una contraseña nueva si es necesario; déjala en blanco para conservar la actual', 'Cambia el estado a Activado o Desactivado', 'Pulsa «Guardar»'],
+          imageAlts: ['Selección de un conductor en la lista', 'Contraseña, estado y botón Guardar en la página de edición'],
+        },
+        'search-driver': {
+          title: 'Buscar un conductor',
+          steps: ['Introduce la cuenta o el nombre del conductor', 'Pulsa «Buscar»'],
+          note: 'La cuenta requiere una coincidencia exacta; el nombre permite coincidencias parciales.',
+          imageAlts: ['Campo y botón de búsqueda en Gestión de conductores'],
+        },
+      },
+    },
+    'route-splitting': {
+      title: 'División de rutas',
+      eyebrow: 'División de rutas',
+      description: 'Divide cajas por orden, conductores, cantidad de paquetes o zona.',
+      note: 'Solo se pueden dividir cajas con el estado «Pendiente de check-in».',
+      entryTitle: 'Abrir División de rutas',
+      entryAlts: ['Acceso a División de rutas en la pantalla de Inicio', 'Botón Dividir cajas para una caja Pendiente de check-in'],
+      procedures: {
+        'split-sequence': {
+          title: 'Dividir cajas en orden',
+          steps: ['Pulsa «Dividir en orden»', 'Introduce el número de paradas que deseas separar', 'Selecciona un conductor', 'Pulsa la marca de verificación para confirmar', 'Para seguir dividiendo, selecciona otro intervalo de paradas', 'Asigna un conductor', 'Cuando termines, pulsa «Aplicar»'],
+          imageAlts: ['Opción Dividir en orden en el resumen', 'Introducción del número de paradas y selección de conductor', 'Selección de otro intervalo y aplicación de la división'],
+          children: {
+            'one-tap-split': {
+              title: 'Usar división rápida',
+              steps: ['Pulsa «División rápida» a la derecha del mapa', 'Elige repartir por conductores e introduce su número, o repartir por cantidad de paquetes e introduce la cantidad', 'Pulsa «Confirmar»', 'Pulsa «Aplicar»'],
+              imageAlts: ['División rápida repartida por conductores', 'División rápida repartida por cantidad de paquetes'],
+            },
+          },
+        },
+        'split-area': {
+          title: 'Dividir cajas por zona',
+          steps: ['Pulsa «Dividir por zona»', 'Dibuja un límite en el mapa colocando puntos alrededor de la zona', 'Pulsa la marca de verificación y asigna un conductor', 'Pulsa «Aplicar»'],
+          note: 'Pulsa las pestañas de las distintas cajas para revisar el resultado. Para repetirlo, elimina la división y vuelve a realizar los pasos.',
+          imageAlts: ['Opción Dividir por zona en el resumen', 'Dibujo de una zona en el mapa y asignación de conductor', 'Resultado de la división por zona y control para eliminar'],
+        },
+      },
+    },
+    'route-planning': {
+      title: 'Planificación de rutas',
+      eyebrow: 'Planificación de rutas',
+      description: 'Divide y ordena geocercas, define puntos de inicio y fin, y guarda planes.',
+      note: 'La planificación de rutas solo está disponible con el estado «Pendiente de check-in».',
+      entryTitle: 'Abrir Planificación de rutas',
+      entryAlts: ['Acceso a Planificación de rutas en la pantalla de Inicio', 'Botón Planificación de rutas para una caja Pendiente de check-in', 'Planes guardados en la página de Planificación de rutas'],
+      procedures: {
+        'split-fence': {
+          title: 'Dividir una geocerca',
+          steps: ['Abre un plan guardado anteriormente', 'Dibuja una línea dentro de la zona colocando puntos', 'Pulsa «Finalizar»'],
+          imageAlts: ['Dibujo de una línea dentro de una zona y selección de Finalizar', 'Resultado de dividir una geocerca'],
+        },
+        'reorder-fence': {
+          title: 'Reordenar geocercas',
+          steps: ['Mantén pulsada una pestaña de geocerca en la parte superior', 'Arrástrala a la posición deseada y suéltala'],
+          imageAlts: ['Pulsación y arrastre de una pestaña superior para reordenar geocercas'],
+        },
+        'set-start-end': {
+          title: 'Cambiar inicio y fin de geocerca',
+          steps: ['Pulsa «Definir inicio»', 'Pulsa cualquier lugar dentro de la geocerca para definir el inicio', 'Pulsa «Definir fin»', 'Pulsa cualquier lugar dentro de la geocerca para definir el final', 'Pulsa «Planificación de rutas»', 'Cuando finalice correctamente, pulsa «Aplicar»'],
+          note: 'Cada geocerca debe tener un punto final. El final de la geocerca anterior se convierte en el inicio de la siguiente.',
+          imageAlts: ['Definición de los puntos de inicio y fin dentro de una geocerca', 'Definición de puntos finales en varias geocercas y aplicación de la ruta'],
+        },
+        'map-provider': {
+          title: 'Cambiar proveedor de mapas',
+          steps: ['Pulsa el nombre del proveedor de mapas actual en la parte inferior', 'Elige NEXT_BILLION, GOOGLE u OPTIMO en la lista'],
+          imageAlts: ['Control del proveedor de mapas en la parte inferior', 'Lista de proveedores de mapas'],
+        },
+        'save-plan': {
+          title: 'Guardar y Guardar como',
+          steps: ['Pulsa «Guardar» para sobrescribir el plan actual', 'Pulsa «Guardar como» para crear un plan nuevo'],
+          imageAlts: ['Selección de Guardar para sobrescribir el plan actual', 'Selección de Guardar como para crear un plan nuevo'],
+        },
+      },
+    },
+  },
+}
+
+const localizeProcedure = (procedure, translation = {}) => ({
+  ...procedure,
+  ...translation,
+  images: procedure.images.map((item, index) => ({
+    ...item,
+    alt: translation.imageAlts?.[index] ?? item.alt,
+  })),
+  children: procedure.children?.map((child) => localizeProcedure(child, translation.children?.[child.id])),
+})
+
+export const getLocalizedChapters = (language = 'zh') => {
+  const locale = translations[language]
+
+  return chapters.map((chapter) => {
+    if (!locale) return { ...chapter, entryTitle: `从首页进入${chapter.title}` }
+
+    const translation = locale[chapter.id]
+    return {
+      ...chapter,
+      ...translation,
+      entry: chapter.entry.map((item, index) => ({
+        ...item,
+        alt: translation.entryAlts?.[index] ?? item.alt,
+      })),
+      procedures: chapter.procedures.map((procedure) => localizeProcedure(procedure, translation.procedures?.[procedure.id])),
+    }
+  })
+}
+
 export const allProcedureCount = chapters.reduce(
   (total, chapter) => total + chapter.procedures.reduce(
     (chapterTotal, procedure) => chapterTotal + 1 + (procedure.children?.length ?? 0),
