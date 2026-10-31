@@ -213,12 +213,12 @@ function Screenshot({ item, onOpen, index, copy }) {
   )
 }
 
-function Procedure({ procedure, onOpen, copy, nested = false }) {
+function Procedure({ procedure, number, onOpen, copy, nested = false }) {
   return (
     <article className={`procedure ${nested ? 'is-subprocedure' : ''}`} id={procedure.id}>
       <div className="procedure-copy">
         <p className="section-kicker">{nested ? copy.subTutorial : copy.operationTutorial}</p>
-        <h3>{procedure.title}</h3>
+        <h3><span className="heading-number">{number}</span>{procedure.title}</h3>
         {procedure.note && <p className="note"><strong>{copy.note}</strong>{procedure.note}</p>}
       </div>
       <div className={`screenshot-grid ${procedure.images.length === 1 ? 'single' : ''}`}>
@@ -226,18 +226,20 @@ function Procedure({ procedure, onOpen, copy, nested = false }) {
       </div>
       {procedure.children?.length > 0 && (
         <div className="subprocedures">
-          {procedure.children.map((child) => <Procedure key={child.id} procedure={child} onOpen={onOpen} copy={copy} nested />)}
+          {procedure.children.map((child, childIndex) => (
+            <Procedure key={child.id} procedure={child} number={`${number}.${childIndex + 1}`} onOpen={onOpen} copy={copy} nested />
+          ))}
         </div>
       )}
     </article>
   )
 }
 
-function Chapter({ chapter, onOpen, copy }) {
+function Chapter({ chapter, number, onOpen, copy }) {
   return (
     <section className={`chapter accent-${chapter.accent}`} id={chapter.id}>
       <header className="chapter-header">
-        <div className="chapter-number">{chapter.number}</div>
+        <div className="chapter-number">{number}</div>
         <div>
           <p className="chapter-eyebrow">{chapter.eyebrow}</p>
           <h2>{chapter.title}</h2>
@@ -260,7 +262,9 @@ function Chapter({ chapter, onOpen, copy }) {
           </div>
         </div>
       )}
-      {chapter.procedures.map((procedure) => <Procedure key={procedure.id} procedure={procedure} onOpen={onOpen} copy={copy} />)}
+      {chapter.procedures.map((procedure, procedureIndex) => (
+        <Procedure key={procedure.id} procedure={procedure} number={`${number}.${procedureIndex + 1}`} onOpen={onOpen} copy={copy} />
+      ))}
     </section>
   )
 }
@@ -289,7 +293,9 @@ function TutorialHome({ chapters, onOpen, copy }) {
   return (
     <main className="tutorial-main" id="main-content">
       <span id="top" className="top-anchor" />
-      {chapters.map((chapter) => <Chapter key={chapter.id} chapter={chapter} onOpen={onOpen} copy={copy} />)}
+      {chapters.map((chapter, chapterIndex) => (
+        <Chapter key={chapter.id} chapter={chapter} number={String(chapterIndex + 1)} onOpen={onOpen} copy={copy} />
+      ))}
       <footer className="footer"><span className="brand-mark">YW</span><p>{copy.footer}</p><a href="#top">{copy.backToTopFooter}</a></footer>
     </main>
   )
