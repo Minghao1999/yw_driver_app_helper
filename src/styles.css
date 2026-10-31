@@ -131,10 +131,6 @@ a { color: inherit; }
 .language-en .procedure h3 { font-size: clamp(21px, 2.7vw, 36px); letter-spacing: -.035em; }
 .language-es .procedure h3 { font-size: clamp(20px, 2.5vw, 34px); letter-spacing: -.03em; }
 .language-en .procedure.is-subprocedure h3, .language-es .procedure.is-subprocedure h3 { font-size: clamp(20px, 2.5vw, 34px); }
-.steps { grid-column: 1 / -1; list-style: none; padding: 0; margin: 30px 0 0; border-top: 1px solid #d8dad4; }
-.steps li { display: grid; grid-template-columns: 35px 1fr; gap: 13px; align-items: start; padding: 14px 0; border-bottom: 1px solid #d8dad4; }
-.steps li span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: white; background: var(--deep); font-size: 11px; font-weight: 700; }
-.steps p { margin: 2px 0 0; color: #3c514b; font-size: 14px; line-height: 1.55; }
 .note { grid-column: 1 / -1; margin: 18px 0 0; padding: 14px 16px; border-radius: 10px; color: #6b5c47; background: #f0e5d4; font-size: 12px; line-height: 1.65; }
 .note strong { margin-right: 10px; color: #9b5729; }
 .screenshot-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 250px)); gap: 18px; align-items: stretch; justify-content: start; }
@@ -224,7 +220,6 @@ a { color: inherit; }
   .procedure h3, .procedure.is-subprocedure h3 { font-size: clamp(18px, 5.2vw, 30px); }
   .language-en .procedure h3, .language-en .procedure.is-subprocedure h3,
   .language-es .procedure h3, .language-es .procedure.is-subprocedure h3 { font-size: clamp(14px, 4.5vw, 21px); }
-  .steps { margin-top: 28px; }
   .note { margin-top: 16px; }
   .screenshot-grid, .screenshot-grid.single { grid-template-columns: 250px; justify-content: center; margin-top: 30px; }
   .screenshot { padding: 24px 12px 12px; border-radius: 12px; }

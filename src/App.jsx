@@ -220,9 +220,6 @@ function Procedure({ procedure, onOpen, copy, nested = false }) {
       <div className="procedure-copy">
         <p className="section-kicker">{nested ? copy.subTutorial : copy.operationTutorial}</p>
         <h3>{procedure.title}</h3>
-        <ol className="steps">
-          {procedure.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}
-        </ol>
         {procedure.note && <p className="note"><strong>{copy.note}</strong>{procedure.note}</p>}
       </div>
       <div className={`screenshot-grid ${procedure.images.length === 1 ? 'single' : ''}`}>
