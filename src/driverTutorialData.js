@@ -26,7 +26,7 @@ const driverChapters = [
     accent: 'orange',
     entry: [],
     procedures: [],
-    note: '如果没有到达地点，会出现弹出提示。',
+    note: '如果没有到达地点，会有弹出框\n选择【补传照片】：直接进入拍照界面\n选择【纠正地址】：会上报司机目前所在位置供审核人员参考',
     images: [
       driverImage(3, '点击我已到达并扫描包裹单号'),
       driverImage(4, '拍照上传页面中的无法派送入口'),
@@ -69,7 +69,7 @@ const driverTranslations = {
     'delivery-failed': {
       title: 'Report a failed delivery',
       eyebrow: 'Driver Guide',
-      note: 'A prompt appears if you have not reached the location.',
+      note: 'A pop-up appears if you have not reached the location.\nSelect “Upload additional photos” to go directly to the camera screen.\nSelect “Correct address” to submit the driver’s current location for the review team’s reference.',
       imageAlts: ['Tap I have arrived and scan the package number', 'Unable to deliver entry on the photo upload page', 'Add failed-delivery evidence and select a reason', 'Select a specific failed-delivery reason', 'Enter a note when Other is selected', 'Capture failed-delivery evidence and confirm'],
     },
     'delivery-countdown': {
@@ -93,7 +93,7 @@ const driverTranslations = {
     'delivery-failed': {
       title: 'Registrar una entrega fallida',
       eyebrow: 'Guía del conductor',
-      note: 'Aparecerá un aviso si todavía no has llegado al lugar.',
+      note: 'Aparecerá una ventana emergente si todavía no has llegado al lugar.\nSelecciona «Subir fotos adicionales» para ir directamente a la pantalla de la cámara.\nSelecciona «Corregir dirección» para enviar la ubicación actual del conductor como referencia para el equipo de revisión.',
       imageAlts: ['Pulsa He llegado y escanea el número del paquete', 'Acceso No se puede entregar en la pantalla de carga de fotos', 'Añade pruebas de la entrega fallida y elige un motivo', 'Elige un motivo específico de entrega fallida', 'Escribe una nota al elegir Otro', 'Captura las pruebas de la entrega fallida y confirma'],
     },
     'delivery-countdown': {

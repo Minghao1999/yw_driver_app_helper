@@ -291,7 +291,7 @@ function TutorialHome({ chapters, onOpen, copy }) {
 }
 
 export default function App() {
-  const [endpoint, setEndpoint] = useState('fleet')
+  const [endpoint, setEndpoint] = useState('driver')
   const [language, setLanguage] = useState('zh')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [lightboxImage, setLightboxImage] = useState(null)
