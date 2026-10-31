@@ -68,7 +68,6 @@ export const chapters = [
         title: '如何按区域拆分分箱',
         summary: '在地图上圈选区域，确认后分配司机。',
         steps: ['点击“按区域拆分”', '在地图上用点画框选择区域', '点击勾选按钮并分配司机', '点击“应用”'],
-        note: '可点击不同分箱标签查看结果；如需重做，可点击删除后重新操作。',
         images: [image(14, '拆分总览中的按区域拆分按钮'), image(15, '在地图中圈选区域并分配司机'), image(16, '按区域拆分后的分箱结果与删除入口')],
       },
     ],
@@ -173,7 +172,6 @@ const translations = {
         'split-area': {
           title: 'Split boxes by area',
           steps: ['Select “Split by Area”', 'Draw a boundary on the map by placing points around the area', 'Select the checkmark and assign a driver', 'Select “Apply”'],
-          note: 'Select different box tabs to review the results. To start over, delete the split and repeat the steps.',
           imageAlts: ['Split by Area option in the split overview', 'Drawing an area on the map and assigning a driver', 'Area split results and delete control'],
         },
       },
@@ -264,7 +262,6 @@ const translations = {
         'split-area': {
           title: 'Dividir cajas por zona',
           steps: ['Pulsa «Dividir por zona»', 'Dibuja un límite en el mapa colocando puntos alrededor de la zona', 'Pulsa la marca de verificación y asigna un conductor', 'Pulsa «Aplicar»'],
-          note: 'Pulsa las pestañas de las distintas cajas para revisar el resultado. Para repetirlo, elimina la división y vuelve a realizar los pasos.',
           imageAlts: ['Opción Dividir por zona en el resumen', 'Dibujo de una zona en el mapa y asignación de conductor', 'Resultado de la división por zona y control para eliminar'],
         },
       },

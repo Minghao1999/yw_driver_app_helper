@@ -13,7 +13,7 @@ const interfaceCopy = {
     backToTop: '返回顶部', openMenu: '打开教程目录', closeMenu: '关闭教程目录', tutorialContents: '教程目录', version: '版本',
     driverMissingTitle: '司机端资料待补充', driverMissingBody: '当前项目已预留司机端教程入口。收到司机端资料后，可按相同结构补充章节、步骤与截图。',
     contentStatus: '内容状态', zoom: '放大', viewLarger: '放大查看', subTutorial: '子教程', operationTutorial: '操作教程', note: '注意',
-    beforeStart: '使用前确认', entry: '入口', closeImage: '关闭大图', footer: 'YW Driver App Helper · 纯前端静态教程',
+    entry: '入口', closeImage: '关闭大图', footer: 'YW Driver App Helper · 纯前端静态教程',
     skip: '跳到主要内容', backToTopFooter: '返回顶部 ↑',
   },
   en: {
@@ -21,7 +21,7 @@ const interfaceCopy = {
     backToTop: 'Back to top', openMenu: 'Open tutorial menu', closeMenu: 'Close tutorial menu', tutorialContents: 'Tutorial contents', version: 'Version',
     driverMissingTitle: 'Driver guide coming soon', driverMissingBody: 'The driver guide section is ready. Once the source material is available, chapters, steps, and screenshots can be added in the same format.',
     contentStatus: 'Content status', zoom: 'View larger', viewLarger: 'View larger', subTutorial: 'Sub-guide', operationTutorial: 'Instructions', note: 'Note',
-    beforeStart: 'Before you start', entry: 'Entry', closeImage: 'Close enlarged image', footer: 'YW Driver App Helper · Front-end tutorial',
+    entry: 'Entry', closeImage: 'Close enlarged image', footer: 'YW Driver App Helper · Front-end tutorial',
     skip: 'Skip to main content', backToTopFooter: 'Back to top ↑',
   },
   es: {
@@ -29,7 +29,7 @@ const interfaceCopy = {
     backToTop: 'Volver arriba', openMenu: 'Abrir índice del tutorial', closeMenu: 'Cerrar índice del tutorial', tutorialContents: 'Índice del tutorial', version: 'Versión',
     driverMissingTitle: 'Guía del conductor pendiente', driverMissingBody: 'La sección de la guía del conductor está preparada. Cuando esté disponible el material original, se podrán añadir capítulos, pasos y capturas con el mismo formato.',
     contentStatus: 'Estado del contenido', zoom: 'Ampliar', viewLarger: 'Ver ampliada', subTutorial: 'Subguía', operationTutorial: 'Instrucciones', note: 'Nota',
-    beforeStart: 'Antes de empezar', entry: 'Acceso', closeImage: 'Cerrar imagen ampliada', footer: 'YW Driver App Helper · Tutorial web',
+    entry: 'Acceso', closeImage: 'Cerrar imagen ampliada', footer: 'YW Driver App Helper · Tutorial web',
     skip: 'Saltar al contenido principal', backToTopFooter: 'Volver arriba ↑',
   },
 }
@@ -244,7 +244,7 @@ function Chapter({ chapter, onOpen, copy }) {
           <h2>{chapter.title}</h2>
         </div>
       </header>
-      {chapter.note && <p className="chapter-note"><span>{copy.beforeStart}</span>{chapter.note}</p>}
+      {chapter.note && <p className="chapter-note"><span>{copy.note}</span>{chapter.note}</p>}
       <div className={`entry-block ${chapter.entry.length === 3 ? 'has-three-images' : ''}`}>
         <div className="entry-copy">
           <span>{copy.entry}</span>
