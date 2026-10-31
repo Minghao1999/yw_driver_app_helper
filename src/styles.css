@@ -50,7 +50,6 @@ a { color: inherit; }
 .mobile-menu-button { display: none; width: 40px; height: 40px; place-items: center; border: 1px solid #d7dad4; border-radius: 10px; color: var(--ink); background: var(--cream); cursor: pointer; }
 
 .sidebar { position: fixed; top: 80px; bottom: 0; left: 0; z-index: 60; width: 260px; border-right: 1px solid rgba(23,52,47,.12); background: #eeece5; overflow-y: auto; }
-.sidebar.is-driver { display: none; }
 .sidebar-inner { min-height: 100%; padding: 32px 24px 24px; display: flex; flex-direction: column; }
 .sidebar-label { margin: 0 0 20px; color: #88948f; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .mobile-endpoint { display: none; }
@@ -137,7 +136,7 @@ a { color: inherit; }
 .screenshot-grid.single { grid-template-columns: 250px; }
 .screenshot { position: relative; display: block; padding: 26px 18px 18px; border: 1px solid #dadcd6; border-radius: 16px; background: #eeede8; cursor: zoom-in; overflow: hidden; text-align: center; transition: .2s ease; }
 .screenshot:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(28,48,43,.1); border-color: #bfc7c2; }
-.screenshot-frame { display: block; width: 100%; aspect-ratio: 1179 / 2390; border-radius: 8px; background: white; overflow: hidden; }
+.screenshot-frame { display: block; width: 100%; aspect-ratio: 1179 / 2379; border-radius: 8px; background: white; overflow: hidden; }
 .screenshot img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .screenshot-number { position: absolute; top: 11px; left: 14px; color: #8d9995; font-size: 9px; font-weight: 700; letter-spacing: .12em; }
 .zoom-hint { position: absolute; right: 28px; bottom: 30px; display: flex; gap: 6px; align-items: center; padding: 8px 10px; border-radius: 7px; color: white; background: rgba(22,63,54,.9); font-size: 10px; opacity: 0; transform: translateY(5px); transition: .2s ease; }
@@ -165,7 +164,6 @@ a { color: inherit; }
   .header-center { display: none; }
   .mobile-menu-button { display: grid; }
   .sidebar { transform: translateX(-100%); transition: transform .24s ease; box-shadow: 20px 0 50px rgba(25,45,40,.14); }
-  .sidebar.is-driver { display: block; }
   .sidebar.is-open { transform: translateX(0); }
   .mobile-endpoint { display: block; margin-bottom: 28px; }
   .mobile-endpoint .sidebar-label { margin-bottom: 10px; }
