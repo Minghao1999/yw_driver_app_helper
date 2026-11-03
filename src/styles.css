@@ -161,7 +161,8 @@ a { color: inherit; }
 .sop-standard-card p { margin: 0 0 12px; }
 .sop-standard-card p:last-child { margin-bottom: 0; }
 .sop-standard-card strong { display: block; margin-bottom: 2px; color: #29453e; font-size: 11px; }
-.sop-standard-card .sop-avoid { padding-top: 11px; border-top: 1px solid #e6ded1; color: #765e42; }
+.sop-standard-card .sop-avoid { margin-top: 15px; padding: 11px 12px; border-top: 0; border-left: 3px solid #d55649; border-radius: 6px; color: #9b342d; background: #fff0ec; }
+.sop-standard-card .sop-avoid strong { color: #b33f35; }
 .sop-evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 900px; }
 .sop-evidence-grid figure { margin: 0; overflow: hidden; border: 1px solid #d8ddd8; border-radius: 14px; background: #fffdf8; }
 .sop-evidence-grid img { display: block; width: 100%; height: auto; background: #fff; }
