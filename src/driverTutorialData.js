@@ -27,15 +27,22 @@ const driverChapters = [
     eyebrow: '司机端',
     accent: 'orange',
     entry: [],
-    procedures: [],
-    note: '如果没有到达地点，会有弹出框\n选择【补传照片】：直接进入拍照界面\n选择【纠正地址】：会上报司机目前所在位置供审核人员参考',
-    images: [
-      driverImage(3, '点击我已到达并扫描包裹单号'),
-      driverImage(4, '拍照上传页面中的无法派送入口'),
-      driverImage(5, '补充派送失败证据并选择原因'),
-      driverImage(6, '选择具体的派送失败原因'),
-      driverImage(7, '选择其他原因时填写备注'),
-      driverImage(8, '拍摄派送失败证据并确认'),
+    note: undefined,
+    images: [],
+    procedures: [
+      {
+        id: 'delivery-failed-guide',
+        title: '操作指南',
+        note: '如果没有到达地点，会有弹出框\n选择【补传照片】：直接进入拍照界面\n选择【纠正地址】：会上报司机目前所在位置供审核人员参考',
+        images: [
+          driverImage(3, '点击我已到达并扫描包裹单号'),
+          driverImage(4, '拍照上传页面中的无法派送入口'),
+          driverImage(5, '补充派送失败证据并选择原因'),
+          driverImage(6, '选择具体的派送失败原因'),
+          driverImage(7, '选择其他原因时填写备注'),
+          driverImage(8, '拍摄派送失败证据并确认'),
+        ],
+      },
     ],
   },
   {
@@ -71,6 +78,7 @@ const driverTranslations = {
     'delivery-failed': {
       title: 'Report a failed delivery',
       eyebrow: 'Driver Guide',
+      guideTitle: 'Operation Guide',
       note: 'A pop-up appears if you have not reached the location.\nSelect “Upload additional photos” to go directly to the camera screen.\nSelect “Correct address” to submit the driver’s current location for the review team’s reference.',
       imageAlts: ['Tap I have arrived and scan the package number', 'Unable to deliver entry on the photo upload page', 'Add failed-delivery evidence and select a reason', 'Select a specific failed-delivery reason', 'Enter a note when Other is selected', 'Capture failed-delivery evidence and confirm'],
     },
@@ -95,6 +103,7 @@ const driverTranslations = {
     'delivery-failed': {
       title: 'Registrar una entrega fallida',
       eyebrow: 'Guía del conductor',
+      guideTitle: 'Guía de operación',
       note: 'Aparecerá una ventana emergente si todavía no has llegado al lugar.\nSelecciona «Subir fotos adicionales» para ir directamente a la pantalla de la cámara.\nSelecciona «Corregir dirección» para enviar la ubicación actual del conductor como referencia para el equipo de revisión.',
       imageAlts: ['Pulsa He llegado y escanea el número del paquete', 'Acceso No se puede entregar en la pantalla de carga de fotos', 'Añade pruebas de la entrega fallida y elige un motivo', 'Elige un motivo específico de entrega fallida', 'Escribe una nota al elegir Otro', 'Captura las pruebas de la entrega fallida y confirma'],
     },
@@ -116,15 +125,28 @@ export const getLocalizedDriverChapters = (language = 'zh') => {
 
   return driverChapters.map((chapter) => {
     const translation = locale?.[chapter.id]
+    const isDeliveryFailed = chapter.id === 'delivery-failed'
+    const guide = isDeliveryFailed ? chapter.procedures[0] : null
+    const localizedGuide = guide ? {
+      ...guide,
+      title: translation?.guideTitle ?? guide.title,
+      note: translation?.note ?? guide.note,
+      images: guide.images.map((image, index) => ({
+        ...image,
+        alt: translation?.imageAlts?.[index] ?? image.alt,
+      })),
+    } : null
+
     return {
       ...chapter,
       ...(translation ?? {}),
+      note: isDeliveryFailed ? undefined : translation?.note ?? chapter.note,
       images: chapter.images.map((image, index) => ({
         ...image,
         alt: translation?.imageAlts?.[index] ?? image.alt,
       })),
-      procedures: chapter.id === 'delivery-failed'
-        ? getDeliveryFailureSopProcedures(language)
+      procedures: isDeliveryFailed
+        ? [localizedGuide, ...getDeliveryFailureSopProcedures(language)]
         : chapter.procedures,
     }
   })
