@@ -245,6 +245,7 @@ function SopTable({ columns, rows, groupFirstColumn = false }) {
                   return (
                     <td
                       key={`${cellIndex}-${cell}`}
+                      className={`sop-column-${cellIndex + 1}`}
                       data-label={columns[cellIndex]}
                       rowSpan={groupFirstColumn && cellIndex === 0 ? groupSpans[rowIndex] : undefined}
                     >

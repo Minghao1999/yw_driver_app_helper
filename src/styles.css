@@ -149,7 +149,7 @@ a { color: inherit; }
 .sop-table th { color: #fff; background: var(--deep); font-size: 11px; font-weight: 700; letter-spacing: .03em; }
 .sop-table td { border-bottom: 1px solid #e3e5df; color: #53655f; font-size: 12px; line-height: 1.55; }
 .sop-table tr:last-child td { border-bottom: 0; }
-.sop-table td:first-child { color: #233f38; font-weight: 700; }
+.sop-table td.sop-column-1 { color: #233f38; font-weight: 700; }
 .sop-table.is-grouped td[rowspan] { vertical-align: middle; background: #f2f4ef; }
 .sop-steps { max-width: 880px; margin: 0 0 24px; padding: 0; list-style: none; counter-reset: sop-step; }
 .sop-steps li { counter-increment: sop-step; position: relative; min-height: 38px; padding: 8px 12px 8px 49px; border-bottom: 1px solid #dddcd5; }
