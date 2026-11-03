@@ -132,8 +132,40 @@ a { color: inherit; }
 .language-en .procedure h3 { font-size: clamp(21px, 2.7vw, 36px); letter-spacing: -.035em; }
 .language-es .procedure h3 { font-size: clamp(20px, 2.5vw, 34px); letter-spacing: -.03em; }
 .language-en .procedure.is-subprocedure h3, .language-es .procedure.is-subprocedure h3 { font-size: clamp(20px, 2.5vw, 34px); }
+.procedure.is-sop h3 { font-size: clamp(22px, 2.6vw, 34px); }
+.language-en .procedure.is-sop h3, .language-es .procedure.is-sop h3 { font-size: clamp(18px, 2vw, 28px); }
 .note { grid-column: 1 / -1; margin: 18px 0 0; padding: 14px 16px; border-radius: 10px; color: #6b5c47; background: #f0e5d4; font-size: 12px; line-height: 1.65; white-space: pre-line; }
 .note strong { margin-right: 10px; color: #9b5729; }
+
+.sop-content { max-width: 1060px; margin-top: 34px; color: #4f625c; font-size: 13px; line-height: 1.7; }
+.sop-content p { margin-top: 0; }
+.sop-audience { display: inline-flex; margin-bottom: 14px; padding: 6px 10px; border-radius: 999px; color: var(--deep); background: #dfeae5; font-size: 11px; font-weight: 700; }
+.sop-principle { max-width: 880px; margin-bottom: 12px; color: #304b44; font-weight: 600; }
+.sop-requirement, .sop-rule { max-width: 880px; margin: 0 0 24px; padding: 14px 16px; border-left: 3px solid var(--orange); background: #f0e5d4; color: #6b5c47; }
+.sop-intro { max-width: 880px; margin-bottom: 20px; color: #62736e; }
+.sop-table-wrap { overflow: hidden; border: 1px solid #d8ddd8; border-radius: 14px; background: #fffdf8; }
+.sop-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.sop-table th, .sop-table td { padding: 13px 14px; text-align: left; vertical-align: top; }
+.sop-table th { color: #fff; background: var(--deep); font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.sop-table td { border-bottom: 1px solid #e3e5df; color: #53655f; font-size: 12px; line-height: 1.55; }
+.sop-table tr:last-child td { border-bottom: 0; }
+.sop-table td:first-child { color: #233f38; font-weight: 700; }
+.sop-steps { max-width: 880px; margin: 0 0 24px; padding: 0; list-style: none; counter-reset: sop-step; }
+.sop-steps li { counter-increment: sop-step; position: relative; min-height: 38px; padding: 8px 12px 8px 49px; border-bottom: 1px solid #dddcd5; }
+.sop-steps li::before { content: counter(sop-step); position: absolute; left: 0; top: 5px; display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; color: #fff; background: var(--deep); font-size: 11px; font-weight: 700; }
+.sop-standards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sop-standard-card { padding: 20px; border: 1px solid #d8ddd8; border-radius: 14px; background: #fffdf8; }
+.sop-standard-card h4 { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; color: var(--deep); font-size: 16px; line-height: 1.35; }
+.sop-code { flex: 0 0 auto; display: grid; place-items: center; min-width: 34px; height: 28px; padding: 0 7px; border-radius: 7px; color: #fff; background: #3b7f69; font-size: 11px; }
+.sop-standard-card p { margin: 0 0 12px; }
+.sop-standard-card p:last-child { margin-bottom: 0; }
+.sop-standard-card strong { display: block; margin-bottom: 2px; color: #29453e; font-size: 11px; }
+.sop-standard-card .sop-avoid { padding-top: 11px; border-top: 1px solid #e6ded1; color: #765e42; }
+.sop-evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 900px; }
+.sop-evidence-grid figure { margin: 0; overflow: hidden; border: 1px solid #d8ddd8; border-radius: 14px; background: #fffdf8; }
+.sop-evidence-grid img { display: block; width: 100%; height: auto; background: #fff; }
+.sop-evidence-grid figcaption { padding: 11px 14px; color: var(--deep); font-size: 12px; font-weight: 700; }
+
 .screenshot-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 250px)); gap: 18px; align-items: stretch; justify-content: start; }
 .chapter-screenshots { margin-top: 0; }
 .screenshot-grid.single { grid-template-columns: 250px; }
@@ -225,7 +257,25 @@ a { color: inherit; }
   .procedure h3, .procedure.is-subprocedure h3 { font-size: clamp(18px, 5.2vw, 30px); }
   .language-en .procedure h3, .language-en .procedure.is-subprocedure h3,
   .language-es .procedure h3, .language-es .procedure.is-subprocedure h3 { font-size: clamp(14px, 4.5vw, 21px); }
+  .procedure.is-sop h3 { font-size: clamp(13px, 3.8vw, 18px); gap: 7px; }
+  .language-en .procedure.is-sop h3, .language-es .procedure.is-sop h3 { font-size: clamp(9px, 2.9vw, 13px); gap: 5px; letter-spacing: -.025em; }
   .note { margin-top: 16px; }
+  .sop-content { margin-top: 24px; font-size: 12px; }
+  .sop-principle, .sop-requirement, .sop-rule { line-height: 1.6; }
+  .sop-table-wrap { overflow: visible; border: 0; background: transparent; }
+  .sop-table, .sop-table tbody, .sop-table tr, .sop-table td { display: block; width: 100%; }
+  .sop-table { table-layout: auto; }
+  .sop-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .sop-table tr { margin-bottom: 12px; overflow: hidden; border: 1px solid #d8ddd8; border-radius: 11px; background: #fffdf8; }
+  .sop-table td { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 10px; padding: 10px 12px; border-bottom: 1px solid #e3e5df; font-size: 11px; }
+  .sop-table td::before { content: attr(data-label); color: #315148; font-size: 10px; font-weight: 700; }
+  .sop-table tr:last-child td:not(:last-child) { border-bottom: 1px solid #e3e5df; }
+  .sop-table td:last-child { border-bottom: 0; }
+  .sop-steps li { padding-right: 4px; }
+  .sop-standards { grid-template-columns: 1fr; gap: 12px; }
+  .sop-standard-card { padding: 16px; }
+  .sop-standard-card h4 { font-size: 14px; }
+  .sop-evidence-grid { grid-template-columns: 1fr; }
   .screenshot-grid, .screenshot-grid.single { grid-template-columns: 250px; justify-content: center; margin-top: 30px; }
   .screenshot { padding: 24px 12px 12px; border-radius: 12px; }
   .entry-images .screenshot { padding: 24px 12px 12px; }

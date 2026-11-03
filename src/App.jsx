@@ -213,17 +213,109 @@ function Screenshot({ item, onOpen, index, copy }) {
   )
 }
 
+function SopTable({ columns, rows }) {
+  return (
+    <div className="sop-table-wrap">
+      <table className="sop-table">
+        <thead>
+          <tr>{columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={`${row[0]}-${rowIndex}`}>
+              {row.map((cell, cellIndex) => (
+                <td key={`${cellIndex}-${cell}`} data-label={columns[cellIndex]}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function SopContent({ content }) {
+  if (!content) return null
+
+  if (content.type === 'overview') {
+    return (
+      <div className="sop-content sop-overview">
+        <p className="sop-audience">{content.audience}</p>
+        <p className="sop-principle">{content.principle}</p>
+        <p className="sop-requirement">{content.requirement}</p>
+        <SopTable columns={content.columns} rows={content.rows} />
+      </div>
+    )
+  }
+
+  if (content.type === 'steps') {
+    return (
+      <div className="sop-content">
+        <ol className="sop-steps">
+          {content.steps.map((step) => <li key={step}>{step}</li>)}
+        </ol>
+        <p className="sop-rule">{content.rule}</p>
+      </div>
+    )
+  }
+
+  if (content.type === 'standards') {
+    return (
+      <div className="sop-content sop-standards">
+        {content.items.map((item) => (
+          <article className="sop-standard-card" key={item.code}>
+            <h4><span className="sop-code">{item.code}</span>{item.title}</h4>
+            <p><strong>{item.summaryLabel}</strong>{item.summary}</p>
+            <p><strong>{item.evidenceLabel}</strong>{item.evidence}</p>
+            <p className="sop-avoid"><strong>{item.avoidLabel}</strong>{item.avoid}</p>
+          </article>
+        ))}
+      </div>
+    )
+  }
+
+  if (content.type === 'table') {
+    return (
+      <div className="sop-content">
+        {content.intro && <p className="sop-intro">{content.intro}</p>}
+        <SopTable columns={content.columns} rows={content.rows} />
+      </div>
+    )
+  }
+
+  if (content.type === 'evidence') {
+    return (
+      <div className="sop-content">
+        <p className="sop-intro">{content.intro}</p>
+        <div className="sop-evidence-grid">
+          {content.examples.map((example) => (
+            <figure key={example.title}>
+              <img src={example.image.src} alt={example.image.alt} loading="lazy" />
+              <figcaption>{example.title}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return null
+}
+
 function Procedure({ procedure, number, onOpen, copy, nested = false }) {
   return (
-    <article className={`procedure ${nested ? 'is-subprocedure' : ''}`} id={procedure.id}>
+    <article className={`procedure ${nested ? 'is-subprocedure' : ''} ${procedure.sop ? 'is-sop' : ''}`} id={procedure.id}>
       <div className="procedure-copy">
         <p className="section-kicker">{nested ? copy.subTutorial : copy.operationTutorial}</p>
         <h3><span className="heading-number">{number}</span>{procedure.title}</h3>
         {procedure.note && <p className="note"><strong>{copy.note}</strong>{procedure.note}</p>}
       </div>
-      <div className={`screenshot-grid ${procedure.images.length === 1 ? 'single' : ''}`}>
-        {procedure.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}
-      </div>
+      {procedure.sop && <SopContent content={procedure.sop} />}
+      {procedure.images.length > 0 && (
+        <div className={`screenshot-grid ${procedure.images.length === 1 ? 'single' : ''}`}>
+          {procedure.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}
+        </div>
+      )}
       {procedure.children?.length > 0 && (
         <div className="subprocedures">
           {procedure.children.map((child, childIndex) => (

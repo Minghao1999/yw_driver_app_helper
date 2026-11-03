@@ -1,3 +1,5 @@
+import { getDeliveryFailureSopProcedures } from './deliveryFailureSopData.js'
+
 const driverImage = (number, alt) => ({
   src: `/driver/image${number}.png`,
   alt,
@@ -112,17 +114,18 @@ const driverTranslations = {
 export const getLocalizedDriverChapters = (language = 'zh') => {
   const locale = driverTranslations[language]
 
-  if (!locale) return driverChapters
-
   return driverChapters.map((chapter) => {
-    const translation = locale[chapter.id]
+    const translation = locale?.[chapter.id]
     return {
       ...chapter,
-      ...translation,
+      ...(translation ?? {}),
       images: chapter.images.map((image, index) => ({
         ...image,
-        alt: translation.imageAlts[index] ?? image.alt,
+        alt: translation?.imageAlts?.[index] ?? image.alt,
       })),
+      procedures: chapter.id === 'delivery-failed'
+        ? getDeliveryFailureSopProcedures(language)
+        : chapter.procedures,
     }
   })
 }
