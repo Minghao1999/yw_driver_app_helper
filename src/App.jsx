@@ -213,21 +213,48 @@ function Screenshot({ item, onOpen, index, copy }) {
   )
 }
 
-function SopTable({ columns, rows }) {
+function SopTable({ columns, rows, groupFirstColumn = false }) {
+  const groupSpans = rows.map((row, rowIndex) => {
+    if (!groupFirstColumn) return 1
+    if (rowIndex > 0 && rows[rowIndex - 1][0] === row[0]) return 0
+
+    let span = 1
+    while (rows[rowIndex + span]?.[0] === row[0]) span += 1
+    return span
+  })
+
   return (
     <div className="sop-table-wrap">
-      <table className="sop-table">
+      <table className={`sop-table ${groupFirstColumn ? 'is-grouped' : ''}`}>
         <thead>
           <tr>{columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr>
         </thead>
         <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={`${row[0]}-${rowIndex}`}>
-              {row.map((cell, cellIndex) => (
-                <td key={`${cellIndex}-${cell}`} data-label={columns[cellIndex]}>{cell}</td>
-              ))}
-            </tr>
-          ))}
+          {rows.map((row, rowIndex) => {
+            const isGroupStart = !groupFirstColumn || groupSpans[rowIndex] > 0
+            const isGroupEnd = !groupFirstColumn || rows[rowIndex + 1]?.[0] !== row[0]
+
+            return (
+              <tr
+                key={`${row[0]}-${rowIndex}`}
+                className={`${isGroupStart ? 'group-start' : 'group-continued'} ${isGroupEnd ? 'group-end' : ''}`}
+              >
+                {row.map((cell, cellIndex) => {
+                  if (groupFirstColumn && cellIndex === 0 && groupSpans[rowIndex] === 0) return null
+
+                  return (
+                    <td
+                      key={`${cellIndex}-${cell}`}
+                      data-label={columns[cellIndex]}
+                      rowSpan={groupFirstColumn && cellIndex === 0 ? groupSpans[rowIndex] : undefined}
+                    >
+                      {cell}
+                    </td>
+                  )
+                })}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>
@@ -243,7 +270,7 @@ function SopContent({ content }) {
         <p className="sop-audience">{content.audience}</p>
         <p className="sop-principle">{content.principle}</p>
         <p className="sop-requirement">{content.requirement}</p>
-        <SopTable columns={content.columns} rows={content.rows} />
+        <SopTable columns={content.columns} rows={content.rows} groupFirstColumn />
       </div>
     )
   }

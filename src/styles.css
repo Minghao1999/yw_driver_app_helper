@@ -150,6 +150,7 @@ a { color: inherit; }
 .sop-table td { border-bottom: 1px solid #e3e5df; color: #53655f; font-size: 12px; line-height: 1.55; }
 .sop-table tr:last-child td { border-bottom: 0; }
 .sop-table td:first-child { color: #233f38; font-weight: 700; }
+.sop-table.is-grouped td[rowspan] { vertical-align: middle; background: #f2f4ef; }
 .sop-steps { max-width: 880px; margin: 0 0 24px; padding: 0; list-style: none; counter-reset: sop-step; }
 .sop-steps li { counter-increment: sop-step; position: relative; min-height: 38px; padding: 8px 12px 8px 49px; border-bottom: 1px solid #dddcd5; }
 .sop-steps li::before { content: counter(sop-step); position: absolute; left: 0; top: 5px; display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; color: #fff; background: var(--deep); font-size: 11px; font-weight: 700; }
@@ -271,6 +272,10 @@ a { color: inherit; }
   .sop-table td::before { content: attr(data-label); color: #315148; font-size: 10px; font-weight: 700; }
   .sop-table tr:last-child td:not(:last-child) { border-bottom: 1px solid #e3e5df; }
   .sop-table td:last-child { border-bottom: 0; }
+  .sop-table.is-grouped tr.group-start:not(.group-end) { margin-bottom: 0; border-bottom: 0; border-radius: 11px 11px 0 0; }
+  .sop-table.is-grouped tr.group-continued { margin-bottom: 0; border-top: 0; border-radius: 0; }
+  .sop-table.is-grouped tr.group-continued.group-end { margin-bottom: 12px; border-bottom: 1px solid #d8ddd8; border-radius: 0 0 11px 11px; }
+  .sop-table.is-grouped td[rowspan] { background: #eef2ed; }
   .sop-steps li { padding-right: 4px; }
   .sop-standards { grid-template-columns: 1fr; gap: 12px; }
   .sop-standard-card { padding: 16px; }
