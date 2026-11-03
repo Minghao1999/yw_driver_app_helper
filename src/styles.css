@@ -154,10 +154,16 @@ a { color: inherit; }
 .sop-steps { max-width: 880px; margin: 0 0 24px; padding: 0; list-style: none; counter-reset: sop-step; }
 .sop-steps li { counter-increment: sop-step; position: relative; min-height: 38px; padding: 8px 12px 8px 49px; border-bottom: 1px solid #dddcd5; }
 .sop-steps li::before { content: counter(sop-step); position: absolute; left: 0; top: 5px; display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; color: #fff; background: var(--deep); font-size: 11px; font-weight: 700; }
-.sop-standards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sop-standard-groups { display: grid; gap: 34px; }
+.sop-standard-group { display: grid; gap: 14px; }
 .sop-standard-card { padding: 20px; border: 1px solid #d8ddd8; border-radius: 14px; background: #fffdf8; }
+.sop-standard-card.is-parent { padding: 24px; border: 2px solid #a9c2b7; background: #edf4f0; box-shadow: 0 8px 24px rgba(22,63,54,.06); }
 .sop-standard-card h4 { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; color: var(--deep); font-size: 16px; line-height: 1.35; }
+.sop-standard-card.is-parent h4 { font-size: 19px; }
 .sop-code { flex: 0 0 auto; display: grid; place-items: center; min-width: 34px; height: 28px; padding: 0 7px; border-radius: 7px; color: #fff; background: #3b7f69; font-size: 11px; }
+.sop-standard-card.is-parent .sop-code { min-width: 42px; height: 34px; background: var(--deep); font-size: 13px; }
+.sop-standard-children { position: relative; margin-left: 28px; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; border-left: 2px solid #9bb8ad; }
+.sop-standard-children::before { content: ''; position: absolute; left: -2px; top: 22px; width: 16px; height: 2px; background: #9bb8ad; }
 .sop-standard-card p { margin: 0 0 12px; }
 .sop-standard-card p:last-child { margin-bottom: 0; }
 .sop-standard-card strong { display: block; margin-bottom: 2px; color: #29453e; font-size: 11px; }
@@ -278,9 +284,13 @@ a { color: inherit; }
   .sop-table.is-grouped tr.group-continued.group-end { margin-bottom: 12px; border-bottom: 1px solid #d8ddd8; border-radius: 0 0 11px 11px; }
   .sop-table.is-grouped td[rowspan] { background: #eef2ed; }
   .sop-steps li { padding-right: 4px; }
-  .sop-standards { grid-template-columns: 1fr; gap: 12px; }
+  .sop-standard-groups { gap: 28px; }
+  .sop-standard-group { gap: 12px; }
+  .sop-standard-children { grid-template-columns: 1fr; margin-left: 8px; padding-left: 13px; gap: 12px; }
   .sop-standard-card { padding: 16px; }
+  .sop-standard-card.is-parent { padding: 18px; }
   .sop-standard-card h4 { font-size: 14px; }
+  .sop-standard-card.is-parent h4 { font-size: 16px; }
   .sop-evidence-grid { grid-template-columns: 1fr; }
   .screenshot-grid, .screenshot-grid.single { grid-template-columns: 250px; justify-content: center; margin-top: 30px; }
   .screenshot { padding: 24px 12px 12px; border-radius: 12px; }

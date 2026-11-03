@@ -262,6 +262,17 @@ function SopTable({ columns, rows, groupFirstColumn = false }) {
   )
 }
 
+function SopStandardCard({ item, isParent = false }) {
+  return (
+    <article className={`sop-standard-card ${isParent ? 'is-parent' : 'is-child'}`}>
+      <h4><span className="sop-code">{item.code}</span>{item.title}</h4>
+      <p><strong>{item.summaryLabel}</strong>{item.summary}</p>
+      <p><strong>{item.evidenceLabel}</strong>{item.evidence}</p>
+      <p className="sop-avoid"><strong>{item.avoidLabel}</strong>{item.avoid}</p>
+    </article>
+  )
+}
+
 function SopContent({ content }) {
   if (!content) return null
 
@@ -288,15 +299,26 @@ function SopContent({ content }) {
   }
 
   if (content.type === 'standards') {
+    const groups = content.items.reduce((result, item) => {
+      if (/^[A-Z]$/.test(item.code)) {
+        result.push({ parent: item, children: [] })
+      } else {
+        result.at(-1)?.children.push(item)
+      }
+      return result
+    }, [])
+
     return (
-      <div className="sop-content sop-standards">
-        {content.items.map((item) => (
-          <article className="sop-standard-card" key={item.code}>
-            <h4><span className="sop-code">{item.code}</span>{item.title}</h4>
-            <p><strong>{item.summaryLabel}</strong>{item.summary}</p>
-            <p><strong>{item.evidenceLabel}</strong>{item.evidence}</p>
-            <p className="sop-avoid"><strong>{item.avoidLabel}</strong>{item.avoid}</p>
-          </article>
+      <div className="sop-content sop-standard-groups">
+        {groups.map((group) => (
+          <section className="sop-standard-group" key={group.parent.code}>
+            <SopStandardCard item={group.parent} isParent />
+            {group.children.length > 0 && (
+              <div className="sop-standard-children">
+                {group.children.map((item) => <SopStandardCard item={item} key={item.code} />)}
+              </div>
+            )}
+          </section>
         ))}
       </div>
     )
