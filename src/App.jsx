@@ -14,6 +14,7 @@ const interfaceCopy = {
     backToTop: '返回顶部', openMenu: '打开教程目录', closeMenu: '关闭教程目录', tutorialContents: '教程目录', version: '版本',
     zoom: '放大', viewLarger: '放大查看', subTutorial: '子教程', operationTutorial: '操作教程', note: '注意',
     entry: '入口', closeImage: '关闭大图', footer: 'YW Driver App Helper',
+    featureNotice: '以下内容为新添加功能，原有功能 SOP 后续补充。',
     skip: '跳到主要内容', backToTopFooter: '返回顶部 ↑',
   },
   en: {
@@ -21,6 +22,7 @@ const interfaceCopy = {
     backToTop: 'Back to top', openMenu: 'Open tutorial menu', closeMenu: 'Close tutorial menu', tutorialContents: 'Tutorial contents', version: 'Version',
     zoom: 'View larger', viewLarger: 'View larger', subTutorial: 'Sub-guide', operationTutorial: 'Instructions', note: 'Note',
     entry: 'Entry', closeImage: 'Close enlarged image', footer: 'YW Driver App Helper',
+    featureNotice: 'The following content covers newly added features. SOPs for existing features will be added later.',
     skip: 'Skip to main content', backToTopFooter: 'Back to top ↑',
   },
   es: {
@@ -28,6 +30,7 @@ const interfaceCopy = {
     backToTop: 'Volver arriba', openMenu: 'Abrir índice del tutorial', closeMenu: 'Cerrar índice del tutorial', tutorialContents: 'Índice del tutorial', version: 'Versión',
     zoom: 'Ampliar', viewLarger: 'Ver ampliada', subTutorial: 'Subguía', operationTutorial: 'Instrucciones', note: 'Nota',
     entry: 'Acceso', closeImage: 'Cerrar imagen ampliada', footer: 'YW Driver App Helper',
+    featureNotice: 'El siguiente contenido corresponde a funciones nuevas. Los SOP de las funciones existentes se añadirán más adelante.',
     skip: 'Saltar al contenido principal', backToTopFooter: 'Volver arriba ↑',
   },
 }
@@ -181,6 +184,7 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, c
           <EndpointSwitch endpoint={endpoint} onChange={(value) => { setEndpoint(value); setMobileOpen(false) }} copy={copy} />
         </div>
         <p className="sidebar-label">{copy.tutorialContents}</p>
+        <p className="feature-notice sidebar-feature-notice">{copy.featureNotice}</p>
         <nav>
           {links.map((link) => (
             <a
@@ -447,6 +451,9 @@ function TutorialHome({ chapters, onOpen, copy }) {
   return (
     <main className="tutorial-main" id="main-content">
       <span id="top" className="top-anchor" />
+      <div className="feature-notice article-feature-notice" role="note">
+        <p>{copy.featureNotice}</p>
+      </div>
       {chapters.map((chapter, chapterIndex) => (
         <Chapter key={chapter.id} chapter={chapter} number={String(chapterIndex + 1)} onOpen={onOpen} copy={copy} />
       ))}
