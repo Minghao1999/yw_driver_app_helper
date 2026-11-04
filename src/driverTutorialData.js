@@ -1,7 +1,15 @@
 import { getDeliveryFailureSopProcedures } from './deliveryFailureSopData.js'
+import { getLocalizedImageSource } from './imageSources.js'
 
 const driverImage = (number, alt) => ({
-  src: `/driver/image${number}.png`,
+  ...getLocalizedImageSource('driver', number),
+  imageNumber: number,
+  alt,
+})
+
+const localizeDriverImage = (image, language, alt = image.alt) => ({
+  ...image,
+  ...getLocalizedImageSource('driver', image.imageNumber, language),
   alt,
 })
 
@@ -131,20 +139,22 @@ export const getLocalizedDriverChapters = (language = 'zh') => {
       ...guide,
       title: translation?.guideTitle ?? guide.title,
       note: translation?.note ?? guide.note,
-      images: guide.images.map((image, index) => ({
-        ...image,
-        alt: translation?.imageAlts?.[index] ?? image.alt,
-      })),
+      images: guide.images.map((image, index) => localizeDriverImage(
+        image,
+        language,
+        translation?.imageAlts?.[index] ?? image.alt,
+      )),
     } : null
 
     return {
       ...chapter,
       ...(translation ?? {}),
       note: isDeliveryFailed ? undefined : translation?.note ?? chapter.note,
-      images: chapter.images.map((image, index) => ({
-        ...image,
-        alt: translation?.imageAlts?.[index] ?? image.alt,
-      })),
+      images: chapter.images.map((image, index) => localizeDriverImage(
+        image,
+        language,
+        translation?.imageAlts?.[index] ?? image.alt,
+      )),
       procedures: isDeliveryFailed
         ? [localizedGuide, ...getDeliveryFailureSopProcedures(language)]
         : chapter.procedures,

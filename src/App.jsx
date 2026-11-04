@@ -202,11 +202,16 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, c
 }
 
 function Screenshot({ item, onOpen, index, copy }) {
+  const useFallback = (event) => {
+    if (!item.fallbackSrc || event.currentTarget.src.endsWith(item.fallbackSrc)) return
+    event.currentTarget.src = item.fallbackSrc
+  }
+
   return (
     <button className="screenshot" onClick={() => onOpen(item)} aria-label={`${copy.viewLarger}: ${item.alt}`}>
       <span className="screenshot-number">{String(index + 1).padStart(2, '0')}</span>
       <span className="screenshot-frame">
-        <img src={item.src} alt={item.alt} loading="lazy" />
+        <img src={item.src} alt={item.alt} loading="lazy" onError={useFallback} />
       </span>
       <span className="zoom-hint"><Icon name="expand" size={16} /> {copy.zoom}</span>
     </button>
@@ -424,7 +429,14 @@ function Lightbox({ image, onClose, copy }) {
     <div className="lightbox" role="dialog" aria-modal="true" aria-label={image.alt} onClick={onClose}>
       <button className="lightbox-close" onClick={onClose} aria-label={copy.closeImage}><Icon name="close" /></button>
       <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
-        <img src={image.src} alt={image.alt} />
+        <img
+          src={image.src}
+          alt={image.alt}
+          onError={(event) => {
+            if (!image.fallbackSrc || event.currentTarget.src.endsWith(image.fallbackSrc)) return
+            event.currentTarget.src = image.fallbackSrc
+          }}
+        />
         <p>{image.alt}</p>
       </div>
     </div>
