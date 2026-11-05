@@ -14,7 +14,7 @@ const interfaceCopy = {
     backToTop: '返回顶部', openMenu: '打开教程目录', closeMenu: '关闭教程目录', tutorialContents: '教程目录', version: '版本',
     zoom: '放大', viewLarger: '放大查看', subTutorial: '子教程', operationTutorial: '操作教程', note: '注意',
     entry: '入口', closeImage: '关闭大图', footer: 'YW Driver App Helper',
-    featureNotice: '以下内容为新添加功能，原有功能 SOP 后续补充。',
+    featureNotice: '以下内容为新添加功能，原有功能 SOP 后续补充。', newBadge: '新',
     skip: '跳到主要内容', backToTopFooter: '返回顶部 ↑',
   },
   en: {
@@ -22,7 +22,7 @@ const interfaceCopy = {
     backToTop: 'Back to top', openMenu: 'Open tutorial menu', closeMenu: 'Close tutorial menu', tutorialContents: 'Tutorial contents', version: 'Version',
     zoom: 'View larger', viewLarger: 'View larger', subTutorial: 'Sub-guide', operationTutorial: 'Instructions', note: 'Note',
     entry: 'Entry', closeImage: 'Close enlarged image', footer: 'YW Driver App Helper',
-    featureNotice: 'The following content covers newly added features. SOPs for existing features will be added later.',
+    featureNotice: 'The following content covers newly added features. SOPs for existing features will be added later.', newBadge: 'NEW',
     skip: 'Skip to main content', backToTopFooter: 'Back to top ↑',
   },
   es: {
@@ -30,7 +30,7 @@ const interfaceCopy = {
     backToTop: 'Volver arriba', openMenu: 'Abrir índice del tutorial', closeMenu: 'Cerrar índice del tutorial', tutorialContents: 'Índice del tutorial', version: 'Versión',
     zoom: 'Ampliar', viewLarger: 'Ver ampliada', subTutorial: 'Subguía', operationTutorial: 'Instrucciones', note: 'Nota',
     entry: 'Acceso', closeImage: 'Cerrar imagen ampliada', footer: 'YW Driver App Helper',
-    featureNotice: 'El siguiente contenido corresponde a funciones nuevas. Los SOP de las funciones existentes se añadirán más adelante.',
+    featureNotice: 'El siguiente contenido corresponde a funciones nuevas. Los SOP de las funciones existentes se añadirán más adelante.', newBadge: 'NUEVO',
     skip: 'Saltar al contenido principal', backToTopFooter: 'Volver arriba ↑',
   },
 }
@@ -113,7 +113,7 @@ function Header({ endpoint, setEndpoint, language, setLanguage, mobileOpen, setM
 function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, copy }) {
   const sidebarRef = useRef(null)
   const links = useMemo(() => chapters.flatMap((chapter, chapterIndex) => [
-    { id: chapter.id, title: chapter.title, chapter: true, number: String(chapterIndex + 1) },
+    { id: chapter.id, title: chapter.tocTitle ?? chapter.title, chapter: true, isNew: chapter.isNew, number: String(chapterIndex + 1) },
     ...chapter.procedures.flatMap((procedure, procedureIndex) => [
       { id: procedure.id, title: procedure.title, number: `${chapterIndex + 1}.${procedureIndex + 1}` },
       ...(procedure.children ?? []).map((child, childIndex) => ({
@@ -184,7 +184,6 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, c
           <EndpointSwitch endpoint={endpoint} onChange={(value) => { setEndpoint(value); setMobileOpen(false) }} copy={copy} />
         </div>
         <p className="sidebar-label">{copy.tutorialContents}</p>
-        <p className="feature-notice sidebar-feature-notice">{copy.featureNotice}</p>
         <nav>
           {links.map((link) => (
             <a
@@ -195,7 +194,8 @@ function Sidebar({ mobileOpen, setMobileOpen, endpoint, setEndpoint, chapters, c
               onClick={() => { setActiveId(link.id); setMobileOpen(false) }}
             >
               <span className="link-number">{link.number}</span>
-              {link.title}
+              <span className="link-title">{link.title}</span>
+              {link.isNew && <span className="new-badge sidebar-new-badge">{copy.newBadge}</span>}
             </a>
           ))}
         </nav>
@@ -388,12 +388,15 @@ function Procedure({ procedure, number, onOpen, copy, nested = false }) {
 
 function Chapter({ chapter, number, onOpen, copy }) {
   return (
-    <section className={`chapter accent-${chapter.accent}`} id={chapter.id}>
+    <section className={`chapter accent-${chapter.accent} ${chapter.compactTitle ? 'is-compact-title' : ''}`} id={chapter.id}>
       <header className="chapter-header">
         <div className="chapter-number">{number}</div>
         <div>
           <p className="chapter-eyebrow">{chapter.eyebrow}</p>
-          <h2>{chapter.title}</h2>
+          <h2>
+            <span>{chapter.title}</span>
+            {chapter.isNew && <span className="new-badge chapter-new-badge">{copy.newBadge}</span>}
+          </h2>
         </div>
       </header>
       {chapter.note && <p className="chapter-note"><span>{copy.note}</span>{chapter.note}</p>}
@@ -451,9 +454,6 @@ function TutorialHome({ chapters, onOpen, copy }) {
   return (
     <main className="tutorial-main" id="main-content">
       <span id="top" className="top-anchor" />
-      <div className="feature-notice article-feature-notice" role="note">
-        <p>{copy.featureNotice}</p>
-      </div>
       {chapters.map((chapter, chapterIndex) => (
         <Chapter key={chapter.id} chapter={chapter} number={String(chapterIndex + 1)} onOpen={onOpen} copy={copy} />
       ))}
