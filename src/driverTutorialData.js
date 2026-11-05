@@ -36,6 +36,11 @@ const driverChapters = [
     accent: 'orange',
     entry: [],
     procedures: [],
+    note: '如果没有到达地点，点击【我已到达】会有弹出框\n选择【补传照片】：可以做派送成功或者派送失败。\n选择【纠正地址】：会上报司机目前所在位置供审核人员参考。',
+    noteLinks: [
+      { label: '派送失败', href: '#delivery-failed' },
+      { label: '纠正地址', href: '#correct-address' },
+    ],
     images: [
       driverImage(14, '从待派送列表进入对应派送任务'),
       driverImage(15, '跳转到默认导航软件前往派送地址'),
@@ -133,7 +138,6 @@ const driverChapters = [
       {
         id: 'delivery-failed-guide',
         title: '操作指南',
-        note: '如果没有到达地点，会有弹出框\n选择【补传照片】：直接进入拍照界面\n选择【纠正地址】：会上报司机目前所在位置供审核人员参考',
         images: [
           driverImage(3, '点击我已到达并扫描包裹单号'),
           driverImage(4, '拍照上传页面中的无法派送入口'),
@@ -179,6 +183,11 @@ const driverTranslations = {
     'driver-start-delivery': {
       title: 'Start delivering',
       eyebrow: 'Driver Guide',
+      note: 'If you have not reached the location, tapping “I have arrived” opens a pop-up.\nSelect “Upload additional photos” to complete a successful delivery or report a failed delivery.\nSelect “Correct address” to submit the driver’s current location for the review team’s reference.',
+      noteLinks: [
+        { label: 'failed delivery', href: '#delivery-failed' },
+        { label: 'Correct address', href: '#correct-address' },
+      ],
       imageAlts: ['Open the delivery task from the Pending Delivery list', 'Open the default navigation app and travel to the address', 'Tap I have arrived and scan to verify', 'Take the required photos and choose a delivery location', 'Choose the exact delivery location from the list', 'Confirm the photos and delivery-location information', 'Submit to complete the delivery'],
     },
     'apartment-code': {
@@ -212,7 +221,6 @@ const driverTranslations = {
       title: 'Report a failed delivery',
       eyebrow: 'Driver Guide',
       guideTitle: 'Operation Guide',
-      note: 'A pop-up appears if you have not reached the location.\nSelect “Upload additional photos” to go directly to the camera screen.\nSelect “Correct address” to submit the driver’s current location for the review team’s reference.',
       imageAlts: ['Tap I have arrived and scan the package number', 'Unable to deliver entry on the photo upload page', 'Add failed-delivery evidence and select a reason', 'Select a specific failed-delivery reason', 'Enter a note when Other is selected', 'Capture failed-delivery evidence and confirm'],
     },
     'delivery-countdown': {
@@ -235,6 +243,11 @@ const driverTranslations = {
     'driver-start-delivery': {
       title: 'Iniciar las entregas',
       eyebrow: 'Guía del conductor',
+      note: 'Si todavía no has llegado al lugar, al pulsar «He llegado» aparecerá una ventana emergente.\nSelecciona «Subir fotos adicionales» para completar una entrega exitosa o registrar una entrega fallida.\nSelecciona «Corregir dirección» para enviar la ubicación actual del conductor como referencia para el equipo de revisión.',
+      noteLinks: [
+        { label: 'entrega fallida', href: '#delivery-failed' },
+        { label: 'Corregir dirección', href: '#correct-address' },
+      ],
       imageAlts: ['Abre la tarea desde la lista Pendiente de entrega', 'Abre la aplicación de navegación predeterminada y dirígete a la dirección', 'Pulsa He llegado y escanea para verificar', 'Toma las fotos requeridas y elige el lugar de entrega', 'Elige el lugar exacto de entrega en la lista', 'Confirma las fotos y el lugar de entrega', 'Envía la información para completar la entrega'],
     },
     'apartment-code': {
@@ -268,7 +281,6 @@ const driverTranslations = {
       title: 'Registrar una entrega fallida',
       eyebrow: 'Guía del conductor',
       guideTitle: 'Guía de operación',
-      note: 'Aparecerá una ventana emergente si todavía no has llegado al lugar.\nSelecciona «Subir fotos adicionales» para ir directamente a la pantalla de la cámara.\nSelecciona «Corregir dirección» para enviar la ubicación actual del conductor como referencia para el equipo de revisión.',
       imageAlts: ['Pulsa He llegado y escanea el número del paquete', 'Acceso No se puede entregar en la pantalla de carga de fotos', 'Añade pruebas de la entrega fallida y elige un motivo', 'Elige un motivo específico de entrega fallida', 'Escribe una nota al elegir Otro', 'Captura las pruebas de la entrega fallida y confirma'],
     },
     'delivery-countdown': {

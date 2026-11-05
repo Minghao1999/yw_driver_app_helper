@@ -386,6 +386,33 @@ function Procedure({ procedure, number, onOpen, copy, nested = false }) {
   )
 }
 
+function LinkedNote({ text, links = [] }) {
+  if (!text || links.length === 0) return text
+
+  const content = []
+  let remaining = text
+  let linkIndex = 0
+
+  while (remaining) {
+    const match = links
+      .map((link) => ({ ...link, index: remaining.indexOf(link.label) }))
+      .filter((link) => link.index >= 0)
+      .sort((a, b) => a.index - b.index)[0]
+
+    if (!match) {
+      content.push(remaining)
+      break
+    }
+
+    if (match.index > 0) content.push(remaining.slice(0, match.index))
+    content.push(<a key={`${match.href}-${linkIndex}`} href={match.href}>{match.label}</a>)
+    remaining = remaining.slice(match.index + match.label.length)
+    linkIndex += 1
+  }
+
+  return content
+}
+
 function Chapter({ chapter, number, onOpen, copy }) {
   return (
     <section className={`chapter accent-${chapter.accent} ${chapter.compactTitle ? 'is-compact-title' : ''}`} id={chapter.id}>
@@ -399,7 +426,12 @@ function Chapter({ chapter, number, onOpen, copy }) {
           </h2>
         </div>
       </header>
-      {chapter.note && <p className="chapter-note"><span>{copy.note}</span>{chapter.note}</p>}
+      {chapter.note && (
+        <p className="chapter-note">
+          <span className="note-label">{copy.note}</span>
+          <LinkedNote text={chapter.note} links={chapter.noteLinks} />
+        </p>
+      )}
       {chapter.images?.length > 0 && (
         <div className={`screenshot-grid chapter-screenshots ${chapter.images.length === 1 ? 'single' : ''}`}>
           {chapter.images.map((item, index) => <Screenshot key={item.src} item={item} index={index} onOpen={onOpen} copy={copy} />)}

@@ -122,7 +122,9 @@ a { color: inherit; }
 .language-es .chapter.is-compact-title h2 { font-size: clamp(17px, 1.85vw, 25px); }
 .chapter-header > div:last-child > p:last-child { margin: 0; color: #667873; line-height: 1.7; }
 .chapter-note { max-width: 850px; margin: -20px 0 50px 109px; padding: 16px 18px; border-left: 3px solid var(--accent); color: #556b65; background: #e7edeb; line-height: 1.6; white-space: pre-line; }
-.chapter-note span { margin-right: 12px; color: var(--deep); font-weight: 700; }
+.chapter-note .note-label { margin-right: 12px; color: var(--deep); font-weight: 700; }
+.chapter-note a { color: #315f72; font-weight: 750; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.chapter-note a:hover { color: var(--deep); }
 .entry-block { display: grid; grid-template-columns: minmax(200px,.65fr) minmax(0,1.35fr); gap: 40px; padding: 34px; border: 1px solid #d8dfdc; border-radius: 20px; background: #e9eeec; }
 .entry-copy { padding: 16px 10px; }
 .entry-copy > span { display: inline-flex; padding: 5px 8px; border-radius: 5px; color: white; background: var(--deep); font-size: 10px; font-weight: 700; letter-spacing: .15em; }
@@ -271,7 +273,7 @@ a { color: inherit; }
   .language-en .chapter.is-compact-title h2,
   .language-es .chapter.is-compact-title h2 { font-size: clamp(8px, 2.25vw, 10px); }
   .chapter-note { margin: -10px 0 38px; }
-  .chapter-note span { display: block; margin: 0 0 5px; }
+  .chapter-note .note-label { display: block; margin: 0 0 5px; }
   .entry-block { grid-template-columns: 1fr; gap: 20px; padding: 19px; }
   .entry-copy { padding: 8px 3px; }
   .entry-copy h3 { font-size: clamp(18px, 5.2vw, 21px); }

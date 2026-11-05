@@ -19,8 +19,54 @@ const localizeImage = (item, language, alt = item.alt) => ({
 
 export const chapters = [
   {
-    id: 'driver-management',
+    id: 'task-claim',
     number: '01',
+    title: '任务领取',
+    eyebrow: 'Task assignment',
+    description: '领取任务、分配司机并完成接单。',
+    accent: 'mint',
+    images: [
+      tutorialImage(30, '从首页进入任务领取'),
+      tutorialImage(31, '在任务列表中指派或更换司机并进入订单详情'),
+      tutorialImage(32, '在接单详情中完成接单'),
+    ],
+    entry: [],
+    procedures: [],
+  },
+  {
+    id: 'task-history',
+    number: '02',
+    title: '历史任务',
+    eyebrow: 'Task history',
+    description: '按日期查看历史任务、分箱与司机派送详情。',
+    accent: 'blue',
+    images: [
+      tutorialImage(33, '从首页进入历史任务'),
+      tutorialImage(34, '按提货日期查询历史任务并进入分箱'),
+      tutorialImage(35, '查看订单当时的司机派送信息与派送结果'),
+      tutorialImage(36, '按单号或包裹序号查询并查看司机派送详情'),
+    ],
+    entry: [],
+    procedures: [],
+  },
+  {
+    id: 'active-deliveries',
+    number: '03',
+    title: '派送中任务',
+    eyebrow: 'Active deliveries',
+    description: '查看待签到、待取货和派送中的分箱状态及妥投数据。',
+    accent: 'mint',
+    images: [
+      tutorialImage(37, '从首页进入派送中任务'),
+      tutorialImage(38, '查看待签到与待取货状态的分箱'),
+      tutorialImage(39, '查看待派送分箱的妥投数据'),
+    ],
+    entry: [],
+    procedures: [],
+  },
+  {
+    id: 'driver-management',
+    number: '04',
     title: '司机管理',
     isNew: true,
     eyebrow: 'Driver management',
@@ -54,7 +100,7 @@ export const chapters = [
   },
   {
     id: 'route-splitting',
-    number: '02',
+    number: '05',
     title: '路线拆分',
     isNew: true,
     eyebrow: 'Route splitting',
@@ -90,7 +136,7 @@ export const chapters = [
   },
   {
     id: 'route-planning',
-    number: '03',
+    number: '06',
     title: '路线规划',
     isNew: true,
     eyebrow: 'Route planning',
@@ -141,6 +187,40 @@ export const chapters = [
 
 const translations = {
   en: {
+    'task-claim': {
+      title: 'Task Assignment',
+      eyebrow: 'Task assignment',
+      description: 'Claim tasks, assign drivers, and complete task acceptance.',
+      imageAlts: [
+        'Opening Task Assignment from the Home screen',
+        'Assigning or changing a driver in the task list and opening order details',
+        'Completing task acceptance from the task details screen',
+      ],
+      procedures: {},
+    },
+    'task-history': {
+      title: 'Task History',
+      eyebrow: 'Task history',
+      description: 'Review historical tasks, boxes, and driver delivery details by date.',
+      imageAlts: [
+        'Opening Task History from the Home screen',
+        'Searching task history by pickup date and opening a box',
+        'Reviewing the assigned driver and delivery result for an order',
+        'Searching by tracking number or package sequence and opening driver delivery details',
+      ],
+      procedures: {},
+    },
+    'active-deliveries': {
+      title: 'Active Deliveries',
+      eyebrow: 'Active deliveries',
+      description: 'Review boxes pending check-in, pickup, or delivery and their delivery metrics.',
+      imageAlts: [
+        'Opening Active Deliveries from the Home screen',
+        'Reviewing boxes that are pending check-in or pickup',
+        'Reviewing delivery metrics for boxes pending delivery',
+      ],
+      procedures: {},
+    },
     'driver-management': {
       title: 'Driver Management',
       eyebrow: 'Driver management',
@@ -231,6 +311,40 @@ const translations = {
     },
   },
   es: {
+    'task-claim': {
+      title: 'Asignación de tareas',
+      eyebrow: 'Asignación de tareas',
+      description: 'Acepta tareas, asigna conductores y completa la aceptación.',
+      imageAlts: [
+        'Acceso a Asignación de tareas desde la pantalla de Inicio',
+        'Asignación o cambio de conductor en la lista y acceso a los detalles del pedido',
+        'Finalización de la aceptación desde los detalles de la tarea',
+      ],
+      procedures: {},
+    },
+    'task-history': {
+      title: 'Historial de tareas',
+      eyebrow: 'Historial de tareas',
+      description: 'Consulta por fecha las tareas anteriores, las cajas y los detalles de entrega.',
+      imageAlts: [
+        'Acceso al Historial de tareas desde la pantalla de Inicio',
+        'Búsqueda por fecha de recogida y acceso a una caja',
+        'Consulta del conductor asignado y del resultado de entrega de un pedido',
+        'Búsqueda por número de seguimiento o secuencia del paquete y consulta de los detalles de entrega',
+      ],
+      procedures: {},
+    },
+    'active-deliveries': {
+      title: 'Tareas en reparto',
+      eyebrow: 'Tareas en reparto',
+      description: 'Consulta cajas pendientes de check-in, recogida o reparto y sus métricas.',
+      imageAlts: [
+        'Acceso a Tareas en reparto desde la pantalla de Inicio',
+        'Consulta de cajas pendientes de check-in o recogida',
+        'Consulta de las métricas de cajas pendientes de reparto',
+      ],
+      procedures: {},
+    },
     'driver-management': {
       title: 'Gestión de conductores',
       eyebrow: 'Gestión de conductores',
@@ -347,6 +461,11 @@ export const getLocalizedChapters = (language = 'zh') => {
     return {
       ...chapter,
       ...translation,
+      images: chapter.images?.map((item, index) => localizeImage(
+        item,
+        language,
+        translation.imageAlts?.[index] ?? item.alt,
+      )),
       entry: chapter.entry.map((item, index) => localizeImage(
         item,
         language,
